@@ -49,7 +49,7 @@ public class Main extends PApplet {
 	public void mousePressed() {
 
 		pantalla = 1;
-
+		pantallajuego.mouse();
 	}
 
 	public void keyPressed() {

@@ -10,6 +10,7 @@ public class PantallaJuego {
 	PImage fondo;
 	ControllerMain controllerMain;
 	Pokedex pokedexScreen;
+	boolean isPokedex;
 
 	public PantallaJuego(PApplet app) {
 
@@ -24,6 +25,11 @@ public class PantallaJuego {
 		app.image(fondo, 0, 0);
 
 		controllerMain.PintarPersonaje();
+		app.rect(50,50,50,50);
+		
+		if(isPokedex) {
+			pokedexScreen.paint();
+		}
 	}
 
 	public void MoverPersonaje(int key) {
@@ -34,6 +40,18 @@ public class PantallaJuego {
 	public void Detener() {
 		
 		controllerMain.Detener();
+	}
+	
+	public void mouse() {
+		
+		if(app.mouseX>50&&app.mouseY>50&&app.mouseX<100&&app.mouseY<100) {
+			isPokedex=true;
+		} 
+		if(pokedexScreen.closePokedex() ) {
+			System.out.println(pokedexScreen.closePokedex());
+			isPokedex=false;
+		}
+		pokedexScreen.mouse();
 	}
 
 }

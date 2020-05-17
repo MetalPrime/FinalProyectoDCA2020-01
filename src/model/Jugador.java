@@ -37,7 +37,7 @@ public class Jugador extends Usuario {
 
 	public void Pintar() {
 		// TODO Auto-generated method stub
-		System.out.println("funciona");
+		//System.out.println("funciona");
 		app.image(quieto, posX, posY);
 	}
 

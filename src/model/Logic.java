@@ -7,6 +7,7 @@ public class Logic {
 	Usuario jugador;
 	PApplet app;
 	boolean mover;
+	Pokemon [] listPokemons;
 
 	public Logic(PApplet app) {
 
@@ -14,6 +15,7 @@ public class Logic {
 
 		jugador = new Jugador(app, 400, 100);
 		mover = false;
+		
 	}
 
 	public void PintarJugador() {
