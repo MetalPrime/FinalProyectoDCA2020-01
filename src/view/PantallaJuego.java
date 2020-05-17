@@ -9,13 +9,14 @@ public class PantallaJuego {
 	PApplet app;
 	PImage fondo;
 	ControllerMain controllerMain;
+	Pokedex pokedexScreen;
 
 	public PantallaJuego(PApplet app) {
 
 		this.app = app;
 		fondo = app.loadImage("../imagenes/mapa.jpg");
 		controllerMain = new ControllerMain(app);
-
+		pokedexScreen = new Pokedex(app);
 	}
 
 	public void Pintar() {
