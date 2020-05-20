@@ -5,6 +5,7 @@ import processing.core.PImage;
 
 public class Jugador extends Usuario {
 
+	private static boolean activo;
 	PImage quieto;
 	PApplet app;
 	PImage[] izquierda, derecha, arriba, abajo;
@@ -13,7 +14,7 @@ public class Jugador extends Usuario {
 	int posX, posY;
 
 	public Jugador(PApplet app, String nombre, int posX, int posY) {
-		super(app, nombre);
+		super(app, nombre,activo);
 		this.app = app;
 		this.nombre = nombre;
 		izquierda = new PImage[2];

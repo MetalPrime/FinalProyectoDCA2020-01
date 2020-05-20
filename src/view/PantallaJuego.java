@@ -23,7 +23,7 @@ public class PantallaJuego {
 
 	public void Pintar() {
 
-		//app.image(fondo, 0, 0);
+		app.image(fondo, 0, 0);
 
 		if (isPokedex) {
 			pokedexScreen.paint();

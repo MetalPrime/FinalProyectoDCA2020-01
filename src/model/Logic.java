@@ -6,7 +6,7 @@ import processing.core.PApplet;
 
 public class Logic {
 
-	ArrayList<Usuario> jugador = new ArrayList<Usuario>();
+	static ArrayList<Usuario> jugador = new ArrayList<Usuario>();
 	PApplet app;
 	String nombre;
 	boolean mover;
@@ -20,35 +20,36 @@ public class Logic {
 
 	}
 
+	public void CrearJugador(String nombre) {
+
+		Jugador jugadortemp = new Jugador(app, nombre, 400, 100);
+		// jugadortemp.setActivo(true);
+
+		jugador.add(jugadortemp);
+
+		jugador.get(jugador.size() - 1).setActivo(true);
+
+		// PintarJugador();
+
+	}
+
 	public void PintarJugador() {
+		System.out.println(jugador.size());
 
 		for (int i = 0; i < jugador.size(); i++) {
-			System.out.println(i);
+			
 			
 			if (jugador.get(i).isActivo()) {
 
-				 if (!mover) {
+				if (!mover) {
 
-				 jugador.get(i).Pintar();
-				 }
+					jugador.get(i).Pintar();
+				}
 
 				System.out.println("funciona");
 
 			}
 		}
-	}
-
-	public void CrearJugador(String nombre) {
-
-		Jugador jugadortemp = new Jugador(app, nombre, 400, 100);
-		//jugadortemp.setActivo(true);
-
-		jugador.add(jugadortemp);
-		
-		jugador.get(jugador.size()-1).setActivo(true);
-
-		PintarJugador();
-
 	}
 
 	public void MoverPersonaje(int key) {

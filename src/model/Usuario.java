@@ -9,10 +9,11 @@ public abstract class Usuario {
 	// boolean activo;
 	public boolean activo;
 
-	public Usuario(PApplet app, String nombre) {
+	public Usuario(PApplet app, String nombre,boolean activo) {
 
 		this.app = app;
 		this.nombre = nombre;
+		this.activo=activo;
 
 	}
 
