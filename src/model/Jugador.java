@@ -8,42 +8,45 @@ public class Jugador extends Usuario {
 	PImage quieto;
 	PApplet app;
 	PImage[] izquierda, derecha, arriba, abajo;
+	String nombre;
 
 	int posX, posY;
 
-	public Jugador(PApplet app, int posX, int posY) {
-		super(app);
+	public Jugador(PApplet app, String nombre, int posX, int posY) {
+		super(app, nombre);
 		this.app = app;
+		this.nombre = nombre;
 		izquierda = new PImage[2];
 		derecha = new PImage[2];
 		arriba = new PImage[2];
 		abajo = new PImage[2];
 		izquierda[0] = app.loadImage("../imagenes/personaje/ladoQuieto.png");
 		izquierda[1] = app.loadImage("../imagenes/personaje/ladoCaminando.png");
-		
+
 		derecha[0] = app.loadImage("../imagenes/personaje/ladoQuieto2.png");
 		derecha[1] = app.loadImage("../imagenes/personaje/ladoCaminando2.png");
-		
-		arriba[0]=app.loadImage("../imagenes/personaje/arribaCaminando.png");
-		arriba[1]=app.loadImage("../imagenes/personaje/arribaCaminando2.png");
-		
-		abajo[0]=app.loadImage("../imagenes/personaje/abajoCaminando.png");
-		abajo[1]=app.loadImage("../imagenes/personaje/abajoCaminando2.png");
+
+		arriba[0] = app.loadImage("../imagenes/personaje/arribaCaminando.png");
+		arriba[1] = app.loadImage("../imagenes/personaje/arribaCaminando2.png");
+
+		abajo[0] = app.loadImage("../imagenes/personaje/abajoCaminando.png");
+		abajo[1] = app.loadImage("../imagenes/personaje/abajoCaminando2.png");
 
 		this.posX = posX;
 		this.posY = posY;
 		quieto = app.loadImage("../imagenes/personaje/abajoquieto.png");
+		activo = false;
 	}
 
 	public void Pintar() {
 		// TODO Auto-generated method stub
-		//System.out.println("funciona");
 		app.image(quieto, posX, posY);
+		System.out.println("prueba");
 	}
 
 	public void Mover(int key) {
-		
-		//Izquierda
+
+		// Izquierda
 
 		if (key == 37) {
 
@@ -55,8 +58,8 @@ public class Jugador extends Usuario {
 			}
 
 		}
-		
-		//Derecha
+
+		// Derecha
 
 		if (key == 39) {
 
@@ -69,9 +72,9 @@ public class Jugador extends Usuario {
 			}
 
 		}
-		
-		//Arriba
-		
+
+		// Arriba
+
 		if (key == 38) {
 
 			for (int i = 0; i < arriba.length; i++) {
@@ -83,10 +86,9 @@ public class Jugador extends Usuario {
 			}
 
 		}
-		
-		//Abajo
-		
-		
+
+		// Abajo
+
 		if (key == 40) {
 
 			for (int i = 0; i < abajo.length; i++) {
@@ -98,7 +100,6 @@ public class Jugador extends Usuario {
 			}
 
 		}
-		
 
 	}
 

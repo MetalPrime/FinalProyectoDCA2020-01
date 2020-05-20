@@ -1,36 +1,66 @@
 package model;
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 
 public class Logic {
 
-	Usuario jugador;
+	ArrayList<Usuario> jugador = new ArrayList<Usuario>();
 	PApplet app;
+	String nombre;
 	boolean mover;
-	Pokemon [] listPokemons;
+	Pokemon[] listPokemons;
 
 	public Logic(PApplet app) {
 
 		this.app = app;
 
-		jugador = new Jugador(app, 400, 100);
 		mover = false;
-		
+
 	}
 
 	public void PintarJugador() {
 
-		if (!mover) {
+		for (int i = 0; i < jugador.size(); i++) {
+			System.out.println(i);
+			
+			if (jugador.get(i).isActivo()) {
 
-			jugador.Pintar();
+				 if (!mover) {
+
+				 jugador.get(i).Pintar();
+				 }
+
+				System.out.println("funciona");
+
+			}
 		}
+	}
+
+	public void CrearJugador(String nombre) {
+
+		Jugador jugadortemp = new Jugador(app, nombre, 400, 100);
+		//jugadortemp.setActivo(true);
+
+		jugador.add(jugadortemp);
+		
+		jugador.get(jugador.size()-1).setActivo(true);
+
+		PintarJugador();
 
 	}
 
 	public void MoverPersonaje(int key) {
 
-		jugador.Mover(key);
-		mover = true;
+		for (int i = 0; i < jugador.size(); i++) {
+
+			if (jugador.get(i).isActivo()) {
+				jugador.get(i).Mover(key);
+				mover = true;
+			}
+
+		}
 
 	}
 

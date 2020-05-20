@@ -37,6 +37,7 @@ public class Main extends PApplet {
 		case 1:
 
 			pantallajuego.Pintar();
+			pantallajuego.PintarPersonaje();
 
 			break;
 
@@ -48,19 +49,30 @@ public class Main extends PApplet {
 
 	public void mousePressed() {
 
-		pantalla = 1;
+		//pantalla = 1;
+		
+		if(mouseX>width/2&&mouseX<width/2+50&&mouseY>height/2+20&&mouseY<height/2+40) {
+			pantallainicio.Registrarse();
+			pantalla=1;
+		}
+		if(pantalla==1) {
 		pantallajuego.mouse();
+		}
 	}
 
 	public void keyPressed() {
-
+		
+		if(pantalla==1) {
 		pantallajuego.MoverPersonaje(keyCode);
+		}
 
 	}
 
 	public void keyReleased() {
-
+		
+		if(pantalla==1) {
 		pantallajuego.Detener();
+		}
 
 	}
 
