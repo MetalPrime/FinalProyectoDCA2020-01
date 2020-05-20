@@ -38,7 +38,7 @@ public class PantallaInicio {
 		name = cp5.get(Textfield.class,"nombre").getText();
 
 		controllerI.CrearJugador(name);
-		cp5.hide();
+		//cp5.hide();
 	}
 
 }

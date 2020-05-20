@@ -12,6 +12,7 @@ public class Main extends PApplet {
 	PantallaJuego pantallajuego;
 	PantallaInicio pantallainicio;
 	PantallaUsuarios pantallaUsuarios;
+	boolean pantallausuarios;
 	boolean mover;
 	int pantalla;
 
@@ -35,6 +36,10 @@ public class Main extends PApplet {
 		switch (pantalla) {
 		case 0:
 			pantallainicio.Pintar();
+			
+			if(pantallausuarios) {
+				pantallaUsuarios.Pintar();
+			}
 			break;
 		case 1:
 
@@ -60,9 +65,10 @@ public class Main extends PApplet {
 				//pantalla = 1;
 			}
 			
-			else if(mouseX > width / 2 && mouseX < width / 2 + 100 && mouseY > height / 2 + 20 && mouseY < height / 2 + 40) {
+			else if(mouseX > width / 2 && mouseX < width / 2 + 100 && mouseY > height / 2 + 20 && mouseY < height / 2 + 140) {
 				
 				
+				pantallausuarios=true;
 				
 			}
 		}
