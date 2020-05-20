@@ -12,6 +12,7 @@ public class Jugador extends Usuario {
 	String nombre;
 
 	int posX, posY;
+	
 
 	public Jugador(PApplet app, String nombre, int posX, int posY) {
 		super(app, nombre,activo);

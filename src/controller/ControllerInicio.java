@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import model.Logic;
 import processing.core.PApplet;
 
@@ -20,5 +22,7 @@ public class ControllerInicio {
 		logic.CrearJugador(nombre);
 
 	}
+	
+	public ArrayList<E>
 
 }

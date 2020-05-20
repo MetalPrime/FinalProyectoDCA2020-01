@@ -1,9 +1,6 @@
 package view;
 
 import processing.core.PApplet;
-
-import java.awt.TextField;
-
 import controlP5.*;
 import controller.ControllerInicio;
 
@@ -21,6 +18,7 @@ public class PantallaInicio {
 		cp5 = new ControlP5(app);
 		cp5.addTextfield("nombre").setPosition(app.width / 2, app.height / 2).setSize(50, 20).setAutoClear(false);
 		cp5.addBang("Registrarse").setPosition(app.width / 2, app.height / 2 + 20).setSize(50, 20);
+		cp5.addBang("historial").setPosition(app.width / 2, app.height / 2 + 100).setSize(50, 20);
 		controllerI = new ControllerInicio(app);
 		cambio = false;
 	}
@@ -32,6 +30,8 @@ public class PantallaInicio {
 		app.fill(255);
 		// app.text("ya me he registrado",20,20);
 	}
+	
+	
 
 	public void Registrarse() {
 

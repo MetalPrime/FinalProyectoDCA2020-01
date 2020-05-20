@@ -1,12 +1,13 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import processing.core.PApplet;
 
 public class Logic {
 
-	static ArrayList<Usuario> jugador = new ArrayList<Usuario>();
+	static LinkedList<Usuario> jugador = new LinkedList<Usuario>();
 	PApplet app;
 	String nombre;
 	boolean mover;
@@ -37,8 +38,7 @@ public class Logic {
 		System.out.println(jugador.size());
 
 		for (int i = 0; i < jugador.size(); i++) {
-			
-			
+
 			if (jugador.get(i).isActivo()) {
 
 				if (!mover) {
@@ -71,6 +71,14 @@ public class Logic {
 
 	public void setMover(boolean mover) {
 		this.mover = mover;
+	}
+
+	public static LinkedList<Usuario> getJugador() {
+		return jugador;
+	}
+
+	public static void setJugador(LinkedList<Usuario> jugador) {
+		Logic.jugador = jugador;
 	}
 
 }
