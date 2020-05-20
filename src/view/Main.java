@@ -24,6 +24,7 @@ public class Main extends PApplet {
 
 		pantallajuego = new PantallaJuego(this);
 		pantallainicio = new PantallaInicio(this);
+		pantallaUsuarios= new PantallaUsuarios(this);
 		pantalla = 0;
 		mover = false;
 		frameRate(10);

@@ -1,8 +1,11 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
+import model.Jugador;
 import model.Logic;
+import model.Usuario;
 import processing.core.PApplet;
 
 public class ControllerInicio {
@@ -23,6 +26,10 @@ public class ControllerInicio {
 
 	}
 	
-	public ArrayList<E>
+	public LinkedList<Usuario> listaJugadores(){
+		return logic.getJugador();
+		
+		
+	}
 
 }
