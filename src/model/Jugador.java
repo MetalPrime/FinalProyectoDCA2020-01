@@ -62,10 +62,15 @@ public class Jugador extends Usuario  {
 				if(j==6 && i==0) {
 					zone=0;
 				} else
-				
-				if(i>=1 && i<=9) {
+				if(i>=1 && i<=3 && j!=2 && j!=4 && j!=3) {
 					zone=0;
-				} else {
+				} else if(i>=4 && i<=9) {
+					zone=0;
+				}else
+				if(i>=1 && i<=3 && j>=2 && j<=4 ) {
+					zone=1;
+				}
+				else {
 					zone=1;
 				}
 				valitedMovement[i][j] = new Map(app, j*60, i*60, 60,zone);
@@ -79,11 +84,6 @@ public class Jugador extends Usuario  {
 		app.image(quieto, posX, posY);
 		
 		System.out.println("prueba");
-		for(int i=0; i<rows;i++) {
-			for(int j=0;j<cols;j++) {
-			valitedMovement[i][j].paint();	
-			}
-		}
 	}
 
 	public void Mover(int key) {
