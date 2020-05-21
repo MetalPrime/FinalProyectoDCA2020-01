@@ -20,13 +20,11 @@ public class Logic {
 		this.app = app;
 
 		mover = false;
-		
-			listPokemons.add(new Pokemon("Beaplum", 50, 50, 50, 50, "Planta"));
-			listPokemons.add(new Pokemon("Toazel", 50, 50, 50, 50, "Agua"));
-			listPokemons.add(new Pokemon("Ashtile", 50, 50, 50, 50, "Fuego"));
-			listPokemons.add(new Pokemon("Greg", 50, 50, 50, 50, "Normal"));
-		
-		
+
+		listPokemons.add(new Pokemon("Beaplum", 50, 50, 50, 50, "Planta"));
+		listPokemons.add(new Pokemon("Toazel", 50, 50, 50, 50, "Agua"));
+		listPokemons.add(new Pokemon("Ashtile", 50, 50, 50, 50, "Fuego"));
+		listPokemons.add(new Pokemon("Greg", 50, 50, 50, 50, "Normal"));
 
 	}
 
@@ -74,15 +72,62 @@ public class Logic {
 
 	}
 
-	public void OrdenarUsuarios(int valor) {
+	public void SeleccionPokemonInicial(int valor) {
+		// fuego
+		if (valor == 0) {
+
+			for (int i = 0; i < jugador.size(); i++) {
+
+				if (jugador.get(i).isActivo()) {
+
+					jugador.get(i).getPokemonJugador().add(listPokemons.get(2));
+
+					//System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
+				}
+
+			}
+
+		}
+
+		// agua
+		if (valor == 1) {
+
+			for (int i = 0; i < jugador.size(); i++) {
+
+				if (jugador.get(i).isActivo()) {
+
+					jugador.get(i).getPokemonJugador().add(listPokemons.get(1));
+
+					//System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
+				}
+
+			}
+
+		}
 		
-	if(valor==0) {
-		
-		Collections.sort(jugador);
+		if(valor==2) {
+			
+			for (int i = 0; i < jugador.size(); i++) {
+
+				if (jugador.get(i).isActivo()) {
+
+					jugador.get(i).getPokemonJugador().add(listPokemons.get(0));
+
+					//System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
+				}
+
+			}
+			
+		}
 	}
-		
-		
-		
+
+	public void OrdenarUsuarios(int valor) {
+
+		if (valor == 0) {
+
+			Collections.sort(jugador);
+		}
+
 	}
 
 	public boolean isMover() {

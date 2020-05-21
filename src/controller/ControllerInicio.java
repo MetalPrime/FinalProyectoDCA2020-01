@@ -22,6 +22,11 @@ public class ControllerInicio {
 
 	}
 	
+	public void SeleccionPokemonInicial(int valor) {
+		
+		logic.SeleccionPokemonInicial(valor);
+	}
+	
 	public LinkedList<Usuario> listaJugadores(){
 		return Logic.getJugador();
 		

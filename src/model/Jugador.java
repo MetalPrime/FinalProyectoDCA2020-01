@@ -1,5 +1,7 @@
 package model;
 
+import java.util.LinkedList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -78,6 +80,8 @@ public class Jugador extends Usuario  {
 			}
 		}
 	}
+
+	
 
 	public void Pintar() {
 		// TODO Auto-generated method stub

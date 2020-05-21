@@ -21,7 +21,7 @@ public class PantallaUsuarios {
 
 		for (int i = 0; i < controllerInicio.listaJugadores().size(); i++) {
 
-			app.text(controllerInicio.listaJugadores().get(i).getNombre(), 60, 30 * i+20);
+			app.text(controllerInicio.listaJugadores().get(i).getNombre(), 60, 30 * i + 20);
 
 		}
 

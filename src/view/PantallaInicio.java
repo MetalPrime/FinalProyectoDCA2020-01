@@ -10,7 +10,7 @@ public class PantallaInicio {
 	PApplet app;
 	ControllerInicio controllerI;
 	ControlP5 cp5;
-	PImage fuego,agua,planta;
+	PImage fuego, agua, planta;
 	String name;
 	boolean cambio;
 
@@ -23,9 +23,9 @@ public class PantallaInicio {
 		cp5.addBang("historial").setPosition(app.width / 2, app.height / 2 + 100).setSize(50, 20);
 		controllerI = new ControllerInicio(app);
 		cambio = false;
-		fuego=app.loadImage("../imagenes/Pokemones/fuegoGrande.png");
-		agua=app.loadImage("../imagenes/Pokemones/aguaGrande.png");
-		planta=app.loadImage("../imagenes/Pokemones/plantaGrande.png");
+		fuego = app.loadImage("../imagenes/Pokemones/fuegoGrande.png");
+		agua = app.loadImage("../imagenes/Pokemones/aguaGrande.png");
+		planta = app.loadImage("../imagenes/Pokemones/plantaGrande.png");
 	}
 
 	public void Pintar() {
@@ -34,16 +34,32 @@ public class PantallaInicio {
 
 		app.fill(255);
 		// app.text("ya me he registrado",20,20);
+		if (cambio) {
+			PokemonInicial();
+		}
 	}
-	
-	
 
 	public void Registrarse() {
 
-		name = cp5.get(Textfield.class,"nombre").getText();
+		name = cp5.get(Textfield.class, "nombre").getText();
 
 		controllerI.CrearJugador(name);
-		//cp5.hide();
+		cp5.hide();
+		cambio = true;
+	}
+
+	public void PokemonInicial() {
+
+		app.image(fuego, 50, 300);
+		app.image(agua, 300, 350);
+		app.image(planta, 600, 340);
+
+	}
+
+	public void SeleccionPokemon(int valor) {
+
+		controllerI.SeleccionPokemonInicial(valor);
+
 	}
 
 }
