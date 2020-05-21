@@ -2,7 +2,7 @@ package model;
 
 import processing.core.PApplet;
 
-public abstract class Usuario {
+public abstract class Usuario implements Comparable <Usuario> {
 
 	PApplet app;
 	String nombre;
@@ -28,5 +28,13 @@ public abstract class Usuario {
 	public abstract void Pintar();
 
 	public abstract void Mover(int key);
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 
 }

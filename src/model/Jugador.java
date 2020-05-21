@@ -3,7 +3,7 @@ package model;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-public class Jugador extends Usuario {
+public class Jugador extends Usuario  {
 
 	private static boolean activo;
 	PImage quieto;
@@ -12,10 +12,9 @@ public class Jugador extends Usuario {
 	String nombre;
 
 	int posX, posY;
-	
 
 	public Jugador(PApplet app, String nombre, int posX, int posY) {
-		super(app, nombre,activo);
+		super(app, nombre, activo);
 		this.app = app;
 		this.nombre = nombre;
 		izquierda = new PImage[2];
@@ -104,5 +103,13 @@ public class Jugador extends Usuario {
 		}
 
 	}
+
+	@Override
+	public int compareTo(Usuario o) {
+		
+		return this.nombre.compareTo(o.nombre);
+	}
+
+	
 
 }

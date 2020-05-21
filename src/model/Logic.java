@@ -1,7 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 import processing.core.PApplet;
 
@@ -63,6 +65,17 @@ public class Logic {
 
 		}
 
+	}
+
+	public void OrdenarUsuarios(int valor) {
+		
+	if(valor==0) {
+		
+		Collections.sort(jugador);
+	}
+		
+		
+		
 	}
 
 	public boolean isMover() {
