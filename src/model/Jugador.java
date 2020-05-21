@@ -10,8 +10,11 @@ public class Jugador extends Usuario  {
 	PApplet app;
 	PImage[] izquierda, derecha, arriba, abajo;
 	String nombre;
-
+	Map [][] valitedMovement;
+	int cols,rows,zone;
+	boolean isMoving;
 	int posX, posY;
+	int inicialX,inicialY;
 
 	public Jugador(PApplet app, String nombre, int posX, int posY) {
 		super(app, nombre, activo);
@@ -37,26 +40,72 @@ public class Jugador extends Usuario  {
 		this.posY = posY;
 		quieto = app.loadImage("../imagenes/personaje/abajoquieto.png");
 		activo = false;
+		cols=15;
+		rows=12;
+		isMoving=false;
+		inicialX = 0;
+		inicialY = 6;
+		
+		valitedMovement = new Map[rows][cols];
+		for(int i=0; i<rows;i++) {
+			for(int j=0;j<cols;j++) {
+				if(j == 0 && i == 11) {
+					zone=1;
+				} else
+				
+				if(i>=0 && i<11 && j==0) {
+					zone=1;
+				} else
+				if(i>=0 && i<11 && j==14) {
+					zone=1;
+				} else
+				if(j==6 && i==0) {
+					zone=0;
+				} else
+				
+				if(i>=1 && i<=9) {
+					zone=0;
+				} else {
+					zone=1;
+				}
+				valitedMovement[i][j] = new Map(app, j*60, i*60, 60,zone);
+				//System.out.println("zone"+ + zone);
+			}
+		}
 	}
 
 	public void Pintar() {
 		// TODO Auto-generated method stub
 		app.image(quieto, posX, posY);
+		
 		System.out.println("prueba");
+		for(int i=0; i<rows;i++) {
+			for(int j=0;j<cols;j++) {
+			valitedMovement[i][j].paint();	
+			}
+		}
 	}
 
 	public void Mover(int key) {
+		
 
+		
 		// Izquierda
 
 		if (key == 37) {
+			
+			if(valitedMovement[inicialX][inicialY-1].getType()==0) {
+				for (int i = 0; i < izquierda.length; i++) {
 
-			for (int i = 0; i < izquierda.length; i++) {
+					app.image(izquierda[app.frameCount % 2], posX, posY);
 
-				app.image(izquierda[app.frameCount % 2], posX, posY);
 
-				posX -= 1;
+				}
+				posX -= 60;
+				inicialY -= 1;
 			}
+
+		
 
 		}
 
@@ -64,13 +113,17 @@ public class Jugador extends Usuario  {
 
 		if (key == 39) {
 
-			for (int i = 0; i < derecha.length; i++) {
+			if(valitedMovement[inicialX][inicialY+1].getType()==0) {
+				for (int i = 0; i < derecha.length; i++) {
 
-				app.image(derecha[app.frameCount % 2], posX, posY);
+					app.image(derecha[app.frameCount % 2], posX, posY);
 
-				posX += 1;
-
+					
+				}	
+				posX += 60;
+				inicialY+=1;
 			}
+			
 
 		}
 
@@ -78,13 +131,17 @@ public class Jugador extends Usuario  {
 
 		if (key == 38) {
 
-			for (int i = 0; i < arriba.length; i++) {
+			if(valitedMovement[inicialX-1][inicialY].getType()==0) {
+				for (int i = 0; i < arriba.length; i++) {
 
-				app.image(arriba[app.frameCount % 2], posX, posY);
+					app.image(arriba[app.frameCount % 2], posX, posY);
 
-				posY -= 1;
-
+				
+				}
+				posY -= 60;
+				inicialX-=1;
 			}
+		
 
 		}
 
@@ -92,13 +149,16 @@ public class Jugador extends Usuario  {
 
 		if (key == 40) {
 
-			for (int i = 0; i < abajo.length; i++) {
+			if(valitedMovement[inicialX+1][inicialY].getType()==0) {
+				for (int i = 0; i < abajo.length; i++) {
 
-				app.image(abajo[app.frameCount % 2], posX, posY);
-
-				posY += 1;
-
+					app.image(abajo[app.frameCount % 2], posX, posY);
+	
+				}
+				posY += 60;
+				inicialX+=1;
 			}
+			
 
 		}
 

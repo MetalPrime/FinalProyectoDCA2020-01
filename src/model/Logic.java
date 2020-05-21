@@ -25,7 +25,7 @@ public class Logic {
 
 	public void CrearJugador(String nombre) {
 
-		Jugador jugadortemp = new Jugador(app, nombre, 400, 100);
+		Jugador jugadortemp = new Jugador(app, nombre, 370, 15);
 		// jugadortemp.setActivo(true);
 
 		jugador.add(jugadortemp);

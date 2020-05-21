@@ -8,6 +8,7 @@ public abstract class Usuario implements Comparable <Usuario> {
 	String nombre;
 	// boolean activo;
 	public boolean activo;
+	
 
 	public Usuario(PApplet app, String nombre,boolean activo) {
 
