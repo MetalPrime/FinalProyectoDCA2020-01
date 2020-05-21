@@ -28,6 +28,14 @@ public class Pokemon implements Comparable,Runnable {
 		
 	}
 	
+	public void PintarPasto() {
+		
+	}
+	
+	public void movement() {
+		
+	}
+	
 	@Override
 	public int compareTo(Object arg0) {
 		// TODO Auto-generated method stub

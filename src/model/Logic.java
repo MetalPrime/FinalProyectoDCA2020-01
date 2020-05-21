@@ -13,13 +13,20 @@ public class Logic {
 	PApplet app;
 	String nombre;
 	boolean mover;
-	Pokemon[] listPokemons;
+	LinkedList<Pokemon> listPokemons = new LinkedList<Pokemon>();
 
 	public Logic(PApplet app) {
 
 		this.app = app;
 
 		mover = false;
+		
+			listPokemons.add(new Pokemon("Beaplum", 50, 50, 50, 50, "Planta"));
+			listPokemons.add(new Pokemon("Toazel", 50, 50, 50, 50, "Agua"));
+			listPokemons.add(new Pokemon("Ashtile", 50, 50, 50, 50, "Fuego"));
+			listPokemons.add(new Pokemon("Greg", 50, 50, 50, 50, "Normal"));
+		
+		
 
 	}
 
@@ -92,6 +99,20 @@ public class Logic {
 
 	public static void setJugador(LinkedList<Usuario> jugador) {
 		Logic.jugador = jugador;
+	}
+
+	/**
+	 * @return the listPokemons
+	 */
+	public LinkedList<Pokemon> getListPokemons() {
+		return listPokemons;
+	}
+
+	/**
+	 * @param listPokemons the listPokemons to set
+	 */
+	public void setListPokemons(LinkedList<Pokemon> listPokemons) {
+		this.listPokemons = listPokemons;
 	}
 
 }
