@@ -1,5 +1,7 @@
 package model;
 
+import java.util.LinkedList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -9,6 +11,7 @@ public class Jugador extends Usuario  {
 	PImage quieto;
 	PApplet app;
 	PImage[] izquierda, derecha, arriba, abajo;
+	LinkedList<Pokemon>pokemonJugador;
 	String nombre;
 	Map [][] valitedMovement;
 	int cols,rows,zone;
@@ -19,6 +22,7 @@ public class Jugador extends Usuario  {
 	public Jugador(PApplet app, String nombre, int posX, int posY) {
 		super(app, nombre, activo);
 		this.app = app;
+		pokemonJugador= new LinkedList<Pokemon>();
 		this.nombre = nombre;
 		izquierda = new PImage[2];
 		derecha = new PImage[2];
@@ -77,6 +81,14 @@ public class Jugador extends Usuario  {
 				//System.out.println("zone"+ + zone);
 			}
 		}
+	}
+
+	public LinkedList<Pokemon> getPokemonJugador() {
+		return pokemonJugador;
+	}
+
+	public void setPokemonJugador(LinkedList<Pokemon> pokemonJugador) {
+		this.pokemonJugador = pokemonJugador;
 	}
 
 	public void Pintar() {

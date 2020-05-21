@@ -62,7 +62,7 @@ public class Main extends PApplet {
 
 			if (mouseX > width / 2 && mouseX < width / 2 + 50 && mouseY > height / 2 + 20 && mouseY < height / 2 + 40) {
 				pantallainicio.Registrarse();
-				pantalla = 1;
+				//pantalla = 1;
 			}
 			
 			else if(mouseX > width / 2 && mouseX < width / 2 + 100 && mouseY > height / 2 + 20 && mouseY < height / 2 + 140) {

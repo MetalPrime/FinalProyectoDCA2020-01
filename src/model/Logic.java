@@ -48,7 +48,7 @@ public class Logic {
 					jugador.get(i).Pintar();
 				}
 
-				System.out.println("funciona");
+				//System.out.println("funciona");
 
 			}
 		}
