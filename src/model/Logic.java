@@ -13,6 +13,7 @@ public class Logic {
 	PApplet app;
 	String nombre;
 	boolean mover;
+	Combate combate;
 	LinkedList<Pokemon> listPokemons = new LinkedList<Pokemon>();
 
 	public Logic(PApplet app) {
@@ -25,26 +26,22 @@ public class Logic {
 		listPokemons.add(new Pokemon("Toazel", 50, 50, 50, 50, "Agua"));
 		listPokemons.add(new Pokemon("Ashtile", 50, 50, 50, 50, "Fuego"));
 		listPokemons.add(new Pokemon("Greg", 50, 50, 50, 50, "Normal"));
+		combate = new Combate(app);
 
 	}
 
 	public void CrearJugador(String nombre) {
 
 		Jugador jugadortemp = new Jugador(app, nombre, 370, 15);
-		// jugadortemp.setActivo(true);
-
 		jugador.add(jugadortemp);
-
 		jugador.get(jugador.size() - 1).setActivo(true);
-
-		// PintarJugador();
 
 	}
 
 	public void PintarJugador() {
 		System.out.println(jugador.size());
 
-		for (int i = 0; i < jugador.size(); i++) {
+		/*for (int i = 0; i < jugador.size(); i++) {
 
 			if (jugador.get(i).isActivo()) {
 
@@ -57,6 +54,9 @@ public class Logic {
 
 			}
 		}
+		*/
+		
+		combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), listPokemons.get(0));
 	}
 
 	public void MoverPersonaje(int key) {
@@ -82,7 +82,7 @@ public class Logic {
 
 					jugador.get(i).getPokemonJugador().add(listPokemons.get(2));
 
-					//System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
+					// System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
 				}
 
 			}
@@ -98,26 +98,24 @@ public class Logic {
 
 					jugador.get(i).getPokemonJugador().add(listPokemons.get(1));
 
-					//System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
+					// System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
 				}
 
 			}
 
 		}
-		
-		if(valor==2) {
-			
+
+		if (valor == 2) {
+
 			for (int i = 0; i < jugador.size(); i++) {
 
 				if (jugador.get(i).isActivo()) {
 
 					jugador.get(i).getPokemonJugador().add(listPokemons.get(0));
-
-					//System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
 				}
 
 			}
-			
+
 		}
 	}
 

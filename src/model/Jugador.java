@@ -87,7 +87,7 @@ public class Jugador extends Usuario  {
 		// TODO Auto-generated method stub
 		app.image(quieto, posX, posY);
 		
-		System.out.println("prueba");
+		//System.out.println("prueba");
 	}
 
 	public void Mover(int key) {
