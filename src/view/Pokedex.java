@@ -1,20 +1,28 @@
 package view;
 
+import controller.ControllerJuego;
 import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Pokedex {
 	private PApplet app;
 	private PImage fondo;
+	private ControllerJuego controlador;
 	
 	public Pokedex(PApplet app) {
 		this.app = app;
 		fondo = app.loadImage("./../imagenes/Pokedex.png");
-		
+		controlador = new ControllerJuego(app);
 	}
 	
 	public void paint() {
 		app.image(fondo, 0, 0);
+		
+		for(int i=0; i<controlador.listPokemons().size();i++) {
+			app.fill(0);
+			app.textSize(20);
+			app.text(controlador.listPokemons().get(i).getNombre(),600,(74*i)+280);
+		}
 	}
 	
 	public void mouse() {

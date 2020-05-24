@@ -56,7 +56,7 @@ public class Logic {
 		}
 		*/
 		
-		combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), listPokemons.get(0));
+		//combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), listPokemons.get(0));
 	}
 
 	public void MoverPersonaje(int key) {

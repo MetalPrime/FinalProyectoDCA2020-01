@@ -1,6 +1,9 @@
 package controller;
 
+import java.util.LinkedList;
+
 import model.Logic;
+import model.Pokemon;
 import processing.core.PApplet;
 
 public class ControllerJuego {
@@ -27,6 +30,11 @@ public class ControllerJuego {
 	public static void Detener() {
 		// TODO Auto-generated method stub
 		logic.setMover(false);
+	}
+	
+	public LinkedList<Pokemon> listPokemons() {
+		return logic.getListPokemons();
+		
 	}
 
 }
