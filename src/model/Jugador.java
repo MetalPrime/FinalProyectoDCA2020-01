@@ -1,7 +1,6 @@
 package model;
 
-import java.util.LinkedList;
-
+import exception.OutLimitsMapException;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -91,8 +90,9 @@ public class Jugador extends Usuario  {
 	}
 
 	public void Mover(int key) {
+			
 		
-
+		
 		
 		// Izquierda
 
@@ -165,6 +165,8 @@ public class Jugador extends Usuario  {
 			
 
 		}
+		
+		
 
 	}
 

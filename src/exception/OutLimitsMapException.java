@@ -1,6 +1,6 @@
 package exception;
 
-public class OutLimitsMapException extends RuntimeException{
+public class OutLimitsMapException extends ArrayIndexOutOfBoundsException{
 
 	/**
 	 * 

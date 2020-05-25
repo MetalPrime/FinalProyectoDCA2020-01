@@ -65,20 +65,25 @@ public class Logic {
 
 	public void MoverPersonaje(int key) {
 		
-		try {
-			for (int i = 0; i < jugador.size(); i++) {
+				try {
+					
+					for (int i = 0; i < jugador.size(); i++) {
 
-				if (jugador.get(i).isActivo()) {
-					jugador.get(i).Mover(key);
-					mover = true;
+						if (jugador.get(i).isActivo()) {
+							jugador.get(i).Mover(key);
+							mover = true;
+						}
+						
+					}
+					
+				} 
+				catch (ArrayIndexOutOfBoundsException E) {
+					System.out.println(E.getMessage());
+					System.out.println(new OutLimitsMapException("Esta sección esta fuera de los limites"));
 				}
-
-			}	
-		} catch (Exception E ) {
-			// TODO: handle exception
-			System.out.println(E.getMessage());
-			throw new OutLimitsMapException("No puede salir de los bordes del mapa");
-		}
+			
+		
+		
 		
 
 	}
