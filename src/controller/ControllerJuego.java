@@ -40,5 +40,15 @@ public class ControllerJuego {
 	public void OrdenPokemon(char key) {
 		logic.OrdenarPokemon(key);
 	}
+	
+	public void mouse() {
+		
+		if(logic.pelea) {
+			
+			logic.mouseMenu();
+			
+		}
+		
+	}
 
 }

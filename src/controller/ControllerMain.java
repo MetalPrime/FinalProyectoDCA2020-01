@@ -32,5 +32,10 @@ public class ControllerMain {
 		
 	}
 	
+	public void mouse() {
+		
+		controllerJuego.mouse();
+	}
+	
 	
 }

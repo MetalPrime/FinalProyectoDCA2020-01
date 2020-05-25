@@ -18,6 +18,7 @@ public class Logic {
 	LinkedList<Pokemon> listPokemons = new LinkedList<Pokemon>();
 	private SortByLevel sortL;
 	private SortByType sortT;
+	public boolean pelea;
 	
 	public Logic(PApplet app) {
 
@@ -60,7 +61,9 @@ public class Logic {
 		}
 		*/
 		
-		//combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), listPokemons.get(0));
+		combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), listPokemons.get(2));
+		pelea=true;
+		//mouseMenu();
 	}
 
 	public void MoverPersonaje(int key) {
@@ -188,6 +191,11 @@ public class Logic {
 	 */
 	public void setListPokemons(LinkedList<Pokemon> listPokemons) {
 		this.listPokemons = listPokemons;
+	}
+
+	public void mouseMenu() {
+		// TODO Auto-generated method stub
+		combate.Menú();		
 	}
 
 }
