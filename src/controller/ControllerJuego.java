@@ -36,5 +36,9 @@ public class ControllerJuego {
 		return logic.getListPokemons();
 		
 	}
+	
+	public void OrdenPokemon(char key) {
+		logic.OrdenarPokemon(key);
+	}
 
 }

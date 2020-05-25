@@ -109,6 +109,8 @@ public class Main extends PApplet {
 		if (pantalla == 1) {
 			pantallajuego.MoverPersonaje(keyCode);
 		}
+		
+		pantallajuego.key(key);
 
 	}
 

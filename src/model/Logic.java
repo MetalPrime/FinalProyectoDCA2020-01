@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import exception.OutLimitsMapException;
 import processing.core.PApplet;
 
 public class Logic {
@@ -15,7 +16,9 @@ public class Logic {
 	boolean mover;
 	Combate combate;
 	LinkedList<Pokemon> listPokemons = new LinkedList<Pokemon>();
-
+	private SortByLevel sortL;
+	private SortByType sortT;
+	
 	public Logic(PApplet app) {
 
 		this.app = app;
@@ -27,7 +30,8 @@ public class Logic {
 		listPokemons.add(new Pokemon("Ashtile", 50, 50, 50, 50, "Fuego"));
 		listPokemons.add(new Pokemon("Greg", 50, 50, 50, 50, "Normal"));
 		combate = new Combate(app);
-
+		sortL = new SortByLevel();
+		sortT = new SortByType();
 	}
 
 	public void CrearJugador(String nombre) {
@@ -39,7 +43,7 @@ public class Logic {
 	}
 
 	public void PintarJugador() {
-		System.out.println(jugador.size());
+		//System.out.println(jugador.size());
 
 		/*for (int i = 0; i < jugador.size(); i++) {
 
@@ -60,15 +64,22 @@ public class Logic {
 	}
 
 	public void MoverPersonaje(int key) {
+		
+		try {
+			for (int i = 0; i < jugador.size(); i++) {
 
-		for (int i = 0; i < jugador.size(); i++) {
+				if (jugador.get(i).isActivo()) {
+					jugador.get(i).Mover(key);
+					mover = true;
+				}
 
-			if (jugador.get(i).isActivo()) {
-				jugador.get(i).Mover(key);
-				mover = true;
-			}
-
+			}	
+		} catch (Exception E ) {
+			// TODO: handle exception
+			System.out.println(E.getMessage());
+			throw new OutLimitsMapException("No puede salir de los bordes del mapa");
 		}
+		
 
 	}
 
@@ -125,6 +136,22 @@ public class Logic {
 
 			Collections.sort(jugador);
 		}
+
+	}
+	
+	public void OrdenarPokemon(char key) {
+		switch (key) {
+		case 'n':
+			Collections.sort(listPokemons);
+			break;
+		case 'l':
+			Collections.sort(listPokemons, sortL);
+			break;
+		case 't':
+			Collections.sort(listPokemons, sortT);
+			break;
+		}
+			
 
 	}
 

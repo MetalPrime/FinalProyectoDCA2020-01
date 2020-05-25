@@ -1,7 +1,7 @@
 package model;
 
 @SuppressWarnings("rawtypes")
-public class Pokemon implements Comparable,Runnable {
+public class Pokemon implements Comparable<Pokemon>,Runnable {
 	private String nombre;
 	private int vida;
 	private int nivel;
@@ -37,9 +37,9 @@ public class Pokemon implements Comparable,Runnable {
 	}
 	
 	@Override
-	public int compareTo(Object arg0) {
+	public int compareTo(Pokemon o) {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.nombre.compareTo(o.getNombre());
 	}
 
 	/**
@@ -125,6 +125,8 @@ public class Pokemon implements Comparable,Runnable {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
+	
 
 
 

@@ -62,5 +62,9 @@ public class PantallaJuego {
 		}
 		pokedexScreen.mouse();
 	}
+	
+	public void key(char key) {
+		pokedexScreen.keyBoard(key);
+	}
 
 }
