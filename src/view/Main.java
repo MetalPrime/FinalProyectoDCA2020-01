@@ -1,5 +1,7 @@
 package view;
 
+import javax.naming.NoInitialContextException;
+
 import processing.core.PApplet;
 
 public class Main extends PApplet {
@@ -61,25 +63,41 @@ public class Main extends PApplet {
 		if (pantalla == 0) {
 			
 			if (pantallainicio.cambio == true) {
-
+				
+				int valor = -1;
+				
 				if (mouseX > 50 && mouseX < 50 + pantallainicio.fuego.width && mouseY > 300
 						&& mouseY < 300 + pantallainicio.fuego.height) {
-
-					pantallainicio.SeleccionPokemon(0);
+					valor = 0;
+					pantallainicio.SeleccionPokemon(valor);
 				}
 
 				if (mouseX > 300 && mouseX < 300 + pantallainicio.agua.width && mouseY > 350
 						&& mouseY < 350 + pantallainicio.agua.width) {
-					pantallainicio.SeleccionPokemon(1);
+					valor = 1;
+					pantallainicio.SeleccionPokemon(valor);
 				}
 
 				if (mouseX > 600 && mouseX < 600 + pantallainicio.planta.width && mouseY > 340
 						&& mouseY < 340 + pantallainicio.planta.height) {
-
-					pantallainicio.SeleccionPokemon(2);
+					valor = 2;
+					pantallainicio.SeleccionPokemon(valor);
 				}
 				
-				pantalla=1;
+				
+				if(valor == -1) {
+					try {
+						throw new NoInitialContextException("Nel mi Perro, Tiene que seleccionar un pokemon");
+					} catch (NoInitialContextException e) {
+						// TODO: handle exception
+						System.out.println(e.getMessage());
+					}
+					
+				} else {
+					pantalla=1;
+				}
+				
+				
 
 			}
 

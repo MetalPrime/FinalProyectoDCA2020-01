@@ -45,7 +45,7 @@ public class Logic {
 	public void PintarJugador() {
 		//System.out.println(jugador.size());
 
-		/*for (int i = 0; i < jugador.size(); i++) {
+		for (int i = 0; i < jugador.size(); i++) {
 
 			if (jugador.get(i).isActivo()) {
 
@@ -54,11 +54,11 @@ public class Logic {
 					jugador.get(i).Pintar();
 				}
 
-				System.out.println("funciona");
+				//System.out.println("funciona");
 
 			}
 		}
-		*/
+		
 		
 		//combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), listPokemons.get(0));
 	}
@@ -133,6 +133,8 @@ public class Logic {
 			}
 
 		}
+		
+	
 	}
 
 	public void OrdenarUsuarios(int valor) {
