@@ -8,6 +8,10 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 	private int experiencia;
 	private int daño;
 	private String tipo;
+	Map [][] valitedPokemon;
+	int cols,rows,zone;
+	int posX, posY;
+	int inicialX,inicialY;
 
 	public Pokemon (String nombre, int vida,int nivel,int experiencia,int daño,String tipo) {
 		this.nombre = nombre;
@@ -16,6 +20,21 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 		this.experiencia = experiencia;
 		this.daño = daño;
 		this.tipo = tipo;
+		zone = 1;
+		cols=15;
+		rows=12;
+		inicialX = 0;
+		inicialY = 6;
+		
+		valitedPokemon = new Map[rows][cols];
+		for(int i=0; i<rows;i++) {
+			for(int j=0;j<cols;j++) {
+				if(i>=7 && i<=10) {
+					zone=0;
+				}
+			}
+		}
+		
 	}
 	
 	@Override
@@ -24,12 +43,12 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 		
 	}
 	
-	public void PintarPokedex() {
-		
-	}
-	
 	public void PintarPasto() {
-		
+		for(int i=0; i<rows;i++) {
+			for(int j=0;j<cols;j++) {
+				valitedPokemon[i][j].paint();
+			}
+		}
 	}
 	
 	public void movement() {
