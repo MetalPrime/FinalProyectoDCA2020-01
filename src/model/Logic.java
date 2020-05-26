@@ -10,7 +10,7 @@ import processing.core.PApplet;
 
 public class Logic {
 
-	static LinkedList<Usuario> jugador = new LinkedList<Usuario>();
+	static LinkedList<Jugador> jugador = new LinkedList<Jugador>();
 	PApplet app;
 	String nombre;
 	boolean mover;
@@ -26,10 +26,10 @@ public class Logic {
 
 		mover = false;
 
-		listPokemons.add(new Pokemon("Beaplum", 50, 1, 50, 50, "Planta"));
-		listPokemons.add(new Pokemon("Toazel", 50, 1, 50, 50, "Agua"));
-		listPokemons.add(new Pokemon("Ashtile", 50, 1, 50, 50, "Fuego"));
-		listPokemons.add(new Pokemon("Greg", 50, 1, 50, 50, "Normal"));
+		listPokemons.add(new Pokemon("Beaplum", 50, 1, 50, 50, "Planta",app));
+		listPokemons.add(new Pokemon("Toazel", 50, 1, 50, 50, "Agua",app));
+		listPokemons.add(new Pokemon("Ashtile", 50, 1, 50, 50, "Fuego",app));
+		listPokemons.add(new Pokemon("Greg", 50, 1, 50, 50, "Normal",app));
 		combate = new Combate(app);
 		sortL = new SortByLevel();
 		sortT = new SortByType();
@@ -60,14 +60,19 @@ public class Logic {
 		}
 
 		
+		for (int i = 0; i < listPokemons.size(); i++) {
+			listPokemons.get(i).PintarPasto();
+		}
 		
-		
+		if(PApplet.dist(jugador.get(0).getPosX(), jugador.get(0).getPosY(),listPokemons.get(0).getPosX() ,listPokemons.get(0).getPosY())<30) {
+			//System.out.println("esta entrando");
+			combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0),
+			listPokemons.get(2));
+		 	pelea=true;
+			mouseMenu();
 
-		// combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0),
-		// listPokemons.get(2));
-		// pelea=true;
-		// mouseMenu();
-
+		}
+	
 	}
 
 	public void MoverPersonaje(int key) {
@@ -171,11 +176,11 @@ public class Logic {
 		this.mover = mover;
 	}
 
-	public static LinkedList<Usuario> getJugador() {
+	public static LinkedList<Jugador> getJugador() {
 		return jugador;
 	}
 
-	public static void setJugador(LinkedList<Usuario> jugador) {
+	public static void setJugador(LinkedList<Jugador> jugador) {
 		Logic.jugador = jugador;
 	}
 

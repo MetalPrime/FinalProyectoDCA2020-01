@@ -87,6 +87,7 @@ public class Jugador extends Usuario  {
 		app.image(quieto, posX, posY);
 		
 		//System.out.println("prueba");
+		
 	}
 
 	public void Mover(int key) {
@@ -174,6 +175,42 @@ public class Jugador extends Usuario  {
 	public int compareTo(Usuario o) {
 		
 		return this.nombre.compareTo(o.nombre);
+	}
+
+
+
+	/**
+	 * @return the posX
+	 */
+	public int getPosX() {
+		return posX;
+	}
+
+
+
+	/**
+	 * @param posX the posX to set
+	 */
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+
+
+	/**
+	 * @return the posY
+	 */
+	public int getPosY() {
+		return posY;
+	}
+
+
+
+	/**
+	 * @param posY the posY to set
+	 */
+	public void setPosY(int posY) {
+		this.posY = posY;
 	}
 
 	

@@ -1,5 +1,8 @@
 package model;
 
+import processing.core.PApplet;
+import processing.core.PImage;
+
 @SuppressWarnings("rawtypes")
 public class Pokemon implements Comparable<Pokemon>,Runnable {
 	private String nombre;
@@ -12,43 +15,81 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 	int cols,rows,zone;
 	int posX, posY;
 	int inicialX,inicialY;
+	private PApplet app;
+	private PImage pokemon;
 
-	public Pokemon (String nombre, int vida,int nivel,int experiencia,int daño,String tipo) {
+	public Pokemon (String nombre, int vida,int nivel,int experiencia,int daño,String tipo,PApplet app) {
 		this.nombre = nombre;
 		this.vida = vida;
 		this.nivel = nivel;
 		this.experiencia = experiencia;
 		this.daño = daño;
 		this.tipo = tipo;
-		zone = 1;
+		zone = 0;
 		cols=15;
 		rows=12;
-		inicialX = 0;
-		inicialY = 6;
+		inicialX = 1;
+		inicialY = 7;
+		this.app = app;
 		
 		valitedPokemon = new Map[rows][cols];
 		for(int i=0; i<rows;i++) {
 			for(int j=0;j<cols;j++) {
-				if(i>=7 && i<=10) {
+				if(i==0) {
+					zone=1;
+				}
+				if(i>=1 ) {
 					zone=0;
 				}
+				
+				if(i>=5) {
+					zone=1;
+				}
+				if(j>=0 && j<=6) {
+					zone=1;
+				}
+				if(j==14) {
+					zone=1;
+				}
+				
+				
+				valitedPokemon[i][j] = new Map(this.app, j*60, i*60, 60,zone);
 			}
 		}
+		
+		if(getTipo().contentEquals("Planta")) {
+			pokemon = app.loadImage("../imagenes/Pokemones/plantaGrande.png");
+		}
+		if(getTipo().contentEquals("Agua")) {
+			pokemon = app.loadImage("../imagenes/Pokemones/aguaGrande.png");
+		}
+		if(getTipo().contentEquals("Fuego")) {
+			pokemon = app.loadImage("../imagenes/Pokemones/fuegoGrande.png");
+		}
+		if(getTipo().contentEquals("Normal")) {
+			pokemon = app.loadImage("../imagenes/Pokemones/fuegoGrande.png");
+		}
+		
+		
+		posX=420;
+		posY=60;
 		
 	}
 	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		movement();
+		try {
+			Thread.sleep(10);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 	}
 	
 	public void PintarPasto() {
-		for(int i=0; i<rows;i++) {
-			for(int j=0;j<cols;j++) {
-				valitedPokemon[i][j].paint();
-			}
-		}
+		app.image(pokemon, posX, posY,60,60);
 	}
 	
 	public void movement() {
@@ -143,6 +184,76 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 	 */
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
+	}
+
+	/**
+	 * @return the zone
+	 */
+	public int getZone() {
+		return zone;
+	}
+
+	/**
+	 * @param zone the zone to set
+	 */
+	public void setZone(int zone) {
+		this.zone = zone;
+	}
+
+	/**
+	 * @return the posX
+	 */
+	public final int getPosX() {
+		return posX;
+	}
+
+	/**
+	 * @param posX the posX to set
+	 */
+	public final void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	/**
+	 * @return the posY
+	 */
+	public final int getPosY() {
+		return posY;
+	}
+
+	/**
+	 * @param posY the posY to set
+	 */
+	public final void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	/**
+	 * @return the inicialX
+	 */
+	public int getInicialX() {
+		return inicialX;
+	}
+
+	/**
+	 * @param inicialX the inicialX to set
+	 */
+	public void setInicialX(int inicialX) {
+		this.inicialX = inicialX;
+	}
+
+	/**
+	 * @return the inicialY
+	 */
+	public int getInicialY() {
+		return inicialY;
+	}
+
+	/**
+	 * @param inicialY the inicialY to set
+	 */
+	public void setInicialY(int inicialY) {
+		this.inicialY = inicialY;
 	}
 
 	

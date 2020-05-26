@@ -1,5 +1,7 @@
 package controller;
 import java.util.LinkedList;
+
+import model.Jugador;
 import model.Logic;
 import model.Usuario;
 import processing.core.PApplet;
@@ -27,7 +29,7 @@ public class ControllerInicio {
 		logic.SeleccionPokemonInicial(valor);
 	}
 	
-	public LinkedList<Usuario> listaJugadores(){
+	public LinkedList<Jugador> listaJugadores(){
 		return Logic.getJugador();
 		
 		

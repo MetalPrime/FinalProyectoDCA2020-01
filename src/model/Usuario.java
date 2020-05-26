@@ -19,7 +19,7 @@ public abstract class Usuario implements Comparable <Usuario> {
 		this.nombre = nombre;
 		this.activo=activo;
 		pokemonJugador= new LinkedList<Pokemon>();
-
+		
 	}
 
 	public LinkedList<Pokemon> getPokemonJugador() {
