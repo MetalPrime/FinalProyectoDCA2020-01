@@ -32,5 +32,9 @@ public class ControllerInicio {
 		
 		
 	}
+	
+	public void mouseMenu() {
+		
+	}
 
 }

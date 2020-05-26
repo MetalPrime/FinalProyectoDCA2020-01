@@ -52,7 +52,7 @@ public class PantallaJuego {
 	}
 
 	public void mouse() {
-
+		
 		if (app.mouseX > 50 && app.mouseY > 50 && app.mouseX < 100 && app.mouseY < 100) {
 			isPokedex = true;
 		}
@@ -61,6 +61,9 @@ public class PantallaJuego {
 			isPokedex = false;
 		}
 		pokedexScreen.mouse();
+		
+		controllerMain.mouse();
+		//if(logi)
 	}
 	
 	public void key(char key) {
