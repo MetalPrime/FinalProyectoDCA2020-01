@@ -63,7 +63,6 @@ public class PantallaJuego {
 		pokedexScreen.mouse();
 		
 		controllerMain.mouse();
-		//if(logi)
 	}
 	
 	public void key(char key) {

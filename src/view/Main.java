@@ -66,20 +66,21 @@ public class Main extends PApplet {
 				
 				int valor = -1;
 				
-				if (mouseX > 50 && mouseX < 50 + pantallainicio.fuego.width && mouseY > 300
-						&& mouseY < 300 + pantallainicio.fuego.height) {
+				if (mouseX > 99 && mouseX < 99 + 173 && mouseY > 169
+						&& mouseY < 169 + 194) {
 					valor = 0;
 					pantallainicio.SeleccionPokemon(valor);
+					System.out.println("fuego");
 				}
 
-				if (mouseX > 300 && mouseX < 300 + pantallainicio.agua.width && mouseY > 350
-						&& mouseY < 350 + pantallainicio.agua.width) {
+				if (mouseX > 605 && mouseX < 605 + 170 && mouseY > 190
+						&& mouseY < 190 + 170) {
 					valor = 1;
 					pantallainicio.SeleccionPokemon(valor);
 				}
 
-				if (mouseX > 600 && mouseX < 600 + pantallainicio.planta.width && mouseY > 340
-						&& mouseY < 340 + pantallainicio.planta.height) {
+				if (mouseX > 360 && mouseX < 360 + 176 && mouseY > 180
+						&& mouseY < 180 + 173) {
 					valor = 2;
 					pantallainicio.SeleccionPokemon(valor);
 				}
@@ -103,8 +104,8 @@ public class Main extends PApplet {
 
 			else {
 
-				if (mouseX > width / 2 && mouseX < width / 2 + 50 && mouseY > height / 2 + 20
-						&& mouseY < height / 2 + 40) {
+				if (mouseX > 329 && mouseX < 329+239 && mouseY >558
+						&& mouseY <558+43) {
 					pantallainicio.Registrarse();
 					// pantalla = 1;
 				}

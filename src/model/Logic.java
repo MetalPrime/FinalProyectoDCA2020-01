@@ -69,7 +69,6 @@ public class Logic {
 			combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0),
 			listPokemons.get(2));
 		 	pelea=true;
-			mouseMenu();
 
 		}
 	
