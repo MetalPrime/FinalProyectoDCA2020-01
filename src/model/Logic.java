@@ -54,15 +54,20 @@ public class Logic {
 					jugador.get(i).Pintar();
 				}
 
-				System.out.println("funciona");
+				//System.out.println("funciona");
 
 			}
 		}
+
+		
+		
+		
 
 		// combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0),
 		// listPokemons.get(2));
 		// pelea=true;
 		// mouseMenu();
+
 	}
 
 	public void MoverPersonaje(int key) {
@@ -130,6 +135,8 @@ public class Logic {
 			}
 
 		}
+		
+	
 	}
 
 	public void OrdenarUsuarios(int valor) {
