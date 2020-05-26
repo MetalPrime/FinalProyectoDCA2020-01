@@ -19,6 +19,7 @@ public class Logic {
 	private SortByLevel sortL;
 	private SortByType sortT;
 	public boolean pelea;
+	
 
 	public Logic(PApplet app) {
 
@@ -33,6 +34,9 @@ public class Logic {
 		combate = new Combate(app);
 		sortL = new SortByLevel();
 		sortT = new SortByType();
+		//jugador.add(new Jugador(app, "NIGGA", 10, 10));
+		System.out.println(jugador.size());
+
 	}
 
 	public void CrearJugador(String nombre) {

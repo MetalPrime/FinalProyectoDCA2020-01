@@ -312,6 +312,7 @@ public class Combate {
 		else if (maquina.getVida() <= 0) {
 
 			// System.out.println("GG");
+			maquina.setVida(0);
 		}
 
 	}
