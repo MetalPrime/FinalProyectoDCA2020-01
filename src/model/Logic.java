@@ -19,17 +19,17 @@ public class Logic {
 	private SortByLevel sortL;
 	private SortByType sortT;
 	public boolean pelea;
-	
+
 	public Logic(PApplet app) {
 
 		this.app = app;
 
 		mover = false;
 
-		listPokemons.add(new Pokemon("Beaplum", 50, 50, 50, 50, "Planta"));
-		listPokemons.add(new Pokemon("Toazel", 50, 50, 50, 50, "Agua"));
-		listPokemons.add(new Pokemon("Ashtile", 50, 50, 50, 50, "Fuego"));
-		listPokemons.add(new Pokemon("Greg", 50, 50, 50, 50, "Normal"));
+		listPokemons.add(new Pokemon("Beaplum", 50, 1, 50, 50, "Planta"));
+		listPokemons.add(new Pokemon("Toazel", 50, 1, 50, 50, "Agua"));
+		listPokemons.add(new Pokemon("Ashtile", 50, 1, 50, 50, "Fuego"));
+		listPokemons.add(new Pokemon("Greg", 50, 1, 50, 50, "Normal"));
 		combate = new Combate(app);
 		sortL = new SortByLevel();
 		sortT = new SortByType();
@@ -44,9 +44,8 @@ public class Logic {
 	}
 
 	public void PintarJugador() {
-		//System.out.println(jugador.size());
 
-		/*for (int i = 0; i < jugador.size(); i++) {
+		for (int i = 0; i < jugador.size(); i++) {
 
 			if (jugador.get(i).isActivo()) {
 
@@ -59,35 +58,30 @@ public class Logic {
 
 			}
 		}
-		*/
-		
-		combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), listPokemons.get(2));
-		pelea=true;
-		//mouseMenu();
+
+		// combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0),
+		// listPokemons.get(2));
+		// pelea=true;
+		// mouseMenu();
 	}
 
 	public void MoverPersonaje(int key) {
-		
-				try {
-					
-					for (int i = 0; i < jugador.size(); i++) {
 
-						if (jugador.get(i).isActivo()) {
-							jugador.get(i).Mover(key);
-							mover = true;
-						}
-						
-					}
-					
-				} 
-				catch (ArrayIndexOutOfBoundsException E) {
-					System.out.println(E.getMessage());
-					System.out.println(new OutLimitsMapException("Esta sección esta fuera de los limites"));
+		try {
+
+			for (int i = 0; i < jugador.size(); i++) {
+
+				if (jugador.get(i).isActivo()) {
+					jugador.get(i).Mover(key);
+					mover = true;
 				}
-			
-		
-		
-		
+
+			}
+
+		} catch (ArrayIndexOutOfBoundsException E) {
+			System.out.println(E.getMessage());
+			System.out.println(new OutLimitsMapException("Esta sección esta fuera de los limites"));
+		}
 
 	}
 
@@ -146,7 +140,7 @@ public class Logic {
 		}
 
 	}
-	
+
 	public void OrdenarPokemon(char key) {
 		switch (key) {
 		case 'n':
@@ -159,7 +153,6 @@ public class Logic {
 			Collections.sort(listPokemons, sortT);
 			break;
 		}
-			
 
 	}
 
@@ -195,7 +188,7 @@ public class Logic {
 
 	public void mouseMenu() {
 		// TODO Auto-generated method stub
-		combate.Menú();		
+		combate.Menú();
 	}
 
 }

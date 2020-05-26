@@ -8,9 +8,10 @@ public class Combate {
 
 	PApplet app;
 	PImage dialogoPokemon;
-	PImage menuAtaque, fuego, agua, planta, fuegoF, aguaF, plantaF, ataqueFuego, ataqueagua, ataqueplanta, vidaJugador;
+	PImage menuAtaque, fuego, agua, planta, fuegoF, aguaF, plantaF, ataqueFuego, ataqueagua, ataqueplanta, vidaJugador,
+			vidaenemigo;
 	PFont fuente;
-	int barraJugador, tamañobarra;
+	int barraMaquina, tamañobarra;
 	int turno;
 	boolean menúPelea;
 	Pokemon maquina, jugador;
@@ -22,9 +23,9 @@ public class Combate {
 		dialogoPokemon = app.loadImage("../imagenes/combate/combateAnuncioVacio.png");
 		menuAtaque = app.loadImage("../imagenes/combate/combateAtaquesPrincipal.png");
 		dialogo = true;
-		fuente = app.createFont("../font/Pokemon Classic.ttf", 30);
+		fuente = app.createFont("../font/Pokemon Classic.ttf", 25);
 		fuego = app.loadImage("../imagenes/Pokemones/fuegoGrandeEspalda.png");
-		turno = -1;
+		turno = 1;
 		agua = app.loadImage("../imagenes/Pokemones/aguaGrandeEspalda.png");
 		planta = app.loadImage("../imagenes/Pokemones/plantaGrandeEspalda.png");
 
@@ -35,7 +36,7 @@ public class Combate {
 		ataqueagua = app.loadImage("../imagenes/combate/combateAtaquesAgua.png");
 		ataqueplanta = app.loadImage("../imagenes/combate/combateAtaquesPlanta.png");
 		vidaJugador = app.loadImage("../imagenes/combate/VidaJugador.png");
-		// tamañobarra = (int) PApplet.map(tamañobarra, this.jugador.getVida(), 0, 0,
+		vidaenemigo = app.loadImage("../imagenes/combate/VidasEnemigos.png");
 		// 197)
 
 	}
@@ -46,19 +47,14 @@ public class Combate {
 		this.maquina = maquina;
 
 		app.background(255);
+		app.textFont(fuente);
 
 		VerificarVida(this.jugador, this.maquina);
-		
-		app.text(this.jugador.getVida(), 50, 50);
-		app.text(this.maquina.getVida(), 100, 100);
-
-		// barraJugador = jugador.getVida();
-
+		tamañobarra = (int) PApplet.map(this.jugador.getVida(), 0, 50, 0, 197);
+		barraMaquina = (int) PApplet.map(this.maquina.getVida(), 0, 50, 0, 197);
 		// app.image(dialogoPokemon, 371, 494);
 		// app.fill(255, 0, 0);
 		// app.text(maquina.getNombre()+"quiere pelear", 380, 500);
-
-		// Pokemon Jugador
 		if (jugador.getTipo().contentEquals("Fuego")) {
 
 			app.image(fuego, 57, 350);
@@ -89,40 +85,57 @@ public class Combate {
 			app.image(plantaF, 573, 36);
 		}
 
+		app.fill(0);
+
+		app.text(this.jugador.getNombre(), 506, 380);
+		app.text(this.maquina.getNombre(), 70, 80);
+		app.textSize(20);
+		app.text(this.jugador.getNivel(), 672, 406);
+		app.text(this.maquina.getNivel(), 243, 114);
 		app.image(menuAtaque, 0, 494);
 		app.image(vidaJugador, 468, 376);
+		app.image(vidaenemigo, 55, 90);
 		app.fill(0, 255, 0);
-		app.rect(579, 423, tamañobarra, 21);
-		// System.out.println(tamañobarra);
+
+		// barra de vida jugador
+
+		if (this.jugador.getNivel() <= 25 || this.maquina.getVida() <= 25) {
+
+			app.fill(255, 255, 0);
+		}
+
+		else if (this.jugador.getVida() <= 15 || this.maquina.getVida() <= 15) {
+
+			app.fill(255, 0, 0);
+		}
+		app.rect(579, 427, tamañobarra, 12);
+		app.rect(151, 134, barraMaquina, 12);
 
 		// Menu Pelea
-		
-		if(!(jugador.getVida()<=0||maquina.getVida()<=0)) {
 
-		if (menúPelea) {
+		if (!(jugador.getVida() <= 0 || maquina.getVida() <= 0)) {
 
-			if (jugador.getTipo().contentEquals("Fuego")) {
+			if (menúPelea) {
 
-				app.image(ataqueFuego, 0, 494);
+				if (jugador.getTipo().contentEquals("Fuego")) {
+
+					app.image(ataqueFuego, 0, 494);
+				}
+				if (jugador.getTipo().contentEquals("Agua")) {
+
+					app.image(ataqueagua, 0, 494);
+				}
+
+				else if (jugador.getTipo().contentEquals("Planta")) {
+
+					app.image(ataqueplanta, 0, 494);
+				}
+
 			}
-			if (jugador.getTipo().contentEquals("Agua")) {
 
-				app.image(ataqueagua, 0, 494);
+			if (turno == -1) {
+				AtaqueMaquina();
 			}
-
-			else if (jugador.getTipo().contentEquals("Planta")) {
-
-				app.image(ataqueplanta, 0, 494);
-			}
-
-		}
-
-		if (turno == -1) {
-			AtaqueMaquina();
-		}
-
-		// System.out.println("vida jugador"+jugador.getVida()+" "+"vida
-		// maquina"+maquina.getVida());
 		}
 	}
 
@@ -141,16 +154,12 @@ public class Combate {
 
 			if (turno == 1) {
 
-				System.out.println("me tocá");
-				// PrimerAtaque
-
 				if (app.mouseX > 442 && app.mouseX < 442 + 288 && app.mouseY > 542 && app.mouseY < 542 + 31) {
 					System.out.println("primer ataque");
 
 					if (jugador.getTipo().contentEquals("Fuego")) {
 
 						Llamarada(maquina);
-						// Mordida(jugador);
 
 					}
 					if (jugador.getTipo().contentEquals("Agua")) {
@@ -248,27 +257,25 @@ public class Combate {
 	}
 
 	public void Llamarada(Pokemon victima) {
-		
-		if(victima==this.jugador) {
-			
-			victima.setVida(victima.getVida()-10);
-		}
-		else {
-		victima.setVida(victima.getVida() - 20);
+
+		if (victima == this.jugador) {
+
+			victima.setVida(victima.getVida() - 10);
+		} else {
+			victima.setVida(victima.getVida() - 20);
 		}
 		turno *= -1;
 
 	}
 
 	public void Mordida(Pokemon victima) {
-		
-		if(victima==this.jugador) {
-			
-			victima.setVida(victima.getVida()-10);
-		}
-		else {
 
-		victima.setVida(victima.getVida() - 10);
+		if (victima == this.jugador) {
+
+			victima.setVida(victima.getVida() - 10);
+		} else {
+
+			victima.setVida(victima.getVida() - 10);
 		}
 		turno *= -1;
 
@@ -299,12 +306,12 @@ public class Combate {
 
 		if (jugador.getVida() <= 0) {
 
-			System.out.println("rip");
+			// System.out.println("rip");
 		}
 
 		else if (maquina.getVida() <= 0) {
 
-			System.out.println("GG");
+			// System.out.println("GG");
 		}
 
 	}
