@@ -44,8 +44,10 @@ public class PantallaJuego {
 	}
 
 	public void PintarPersonaje() {
-
-		controllerMain.PintarPersonaje();
+		if(isPokedex==false) {
+			controllerMain.PintarPersonaje();
+		}
+		
 	}
 
 	public void MoverPersonaje(int key) {

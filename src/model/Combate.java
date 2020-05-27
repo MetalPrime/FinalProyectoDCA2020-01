@@ -188,7 +188,7 @@ public class Combate {
 			if (turno == 1) {
 
 				if (app.mouseX > 442 && app.mouseX < 442 + 288 && app.mouseY > 542 && app.mouseY < 542 + 31) {
-					System.out.println("primer ataque");
+					//System.out.println("primer ataque");
 
 					if (jugador.getTipo().contentEquals("Fuego")) {
 
@@ -198,7 +198,7 @@ public class Combate {
 					if (jugador.getTipo().contentEquals("Agua")) {
 
 						Lenguetazo(maquina);
-						System.out.println("ataqué");
+						//System.out.println("ataqué");
 					}
 
 					else if (jugador.getTipo().contentEquals("Planta")) {

@@ -21,7 +21,7 @@ public class Logic {
 	private Rival rival;
 	private SortByLevel sortL;
 	private SortByType sortT;
-	public boolean pelea;
+	public boolean pelea,peleaRival;
 	private int randomPelea;
 	private int randomEnemyPokemon;
 
@@ -94,7 +94,7 @@ public class Logic {
 						pelea=false;
 						combate.setCapturar(false);
 						combate.setGane(false);
-						System.out.println(jugador.get(i).getPokemonJugador().size());
+						//System.out.println(jugador.get(i).getPokemonJugador().size());
 						
 					}
 
@@ -120,14 +120,17 @@ public class Logic {
 			new Thread(salvajePokemons.get(i)).start();
 			
 		}
+		if(pelea==false) {
+			rival.Pintar();
+		}
 		
-		rival.Pintar();
 		System.out.println(rival.getPokemonJugador().size());
 		
 		if(PApplet.dist(jugador.get(0).getPosX(), jugador.get(0).getPosY(),rival.getPosX(),rival.getPosY())<30) {
 			try {
-				if(jugador.get(0).getPokemonJugador().size()==2) {
+				if(jugador.get(0).getPokemonJugador().size()>=2) {
 					combateRival.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), rival.getPokemonJugador().get(1));
+				 	peleaRival=true;
 				}
 				else {
 					throw new OutLevelException("No estas listo para mi");
@@ -313,6 +316,10 @@ public class Logic {
 	public void mouseMenu() {
 		// TODO Auto-generated method stub
 		combate.Menú();
+		if(peleaRival==true) {
+			combateRival.Menú();
+		}
+		
 	}
 
 }
