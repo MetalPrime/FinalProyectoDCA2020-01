@@ -4,22 +4,23 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 @SuppressWarnings("rawtypes")
-public class Pokemon implements Comparable<Pokemon>,Runnable {
+public class Pokemon implements Comparable<Pokemon>, Runnable {
 	private String nombre;
 	private int vida;
 	private int nivel;
 	private int experiencia;
 	private int daño;
 	private String tipo;
-	Map [][] valitedPokemon;
-	int cols,rows,zone;
+	Map[][] valitedPokemon;
+	int cols, rows, zone;
 	int posX, posY;
-	int inicialX,inicialY;
+	int inicialX, inicialY;
 	private PApplet app;
 	private PImage pokemon;
 	private int randomMovement;
+	private boolean mover;
 
-	public Pokemon (String nombre, int vida,int nivel,int experiencia,int daño,String tipo,PApplet app) {
+	public Pokemon(String nombre, int vida, int nivel, int experiencia, int daño, String tipo, PApplet app) {
 		this.nombre = nombre;
 		this.vida = vida;
 		this.nivel = nivel;
@@ -27,126 +28,161 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 		this.daño = daño;
 		this.tipo = tipo;
 		zone = 0;
-		cols=15;
-		rows=12;
+		cols = 15;
+		rows = 12;
 		inicialX = 2;
 		inicialY = 8;
 		this.app = app;
-		
+		mover = true;
+
 		valitedPokemon = new Map[rows][cols];
-		for(int i=0; i<rows;i++) {
-			for(int j=0;j<cols;j++) {
-				if(i==0) {
-					zone=1;
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < cols; j++) {
+				if (i == 0) {
+					zone = 1;
 				}
-				if(i>=1 ) {
-					zone=0;
+				if (i >= 1) {
+					zone = 0;
 				}
-				
-				if(i>=5) {
-					zone=1;
+
+				if (i >= 5) {
+					zone = 1;
 				}
-				if(j>=0 && j<=6) {
-					zone=1;
+				if (j >= 0 && j <= 6) {
+					zone = 1;
 				}
-				if(j==14) {
-					zone=1;
+				if (j == 14) {
+					zone = 1;
 				}
-				
-				
-				valitedPokemon[i][j] = new Map(this.app, j*60, i*60, 60,zone);
+
+				valitedPokemon[i][j] = new Map(this.app, j * 60, i * 60, 60, zone);
 			}
 		}
-		
-		if(getTipo().contentEquals("Planta")) {
+
+		if (getTipo().contentEquals("Planta")) {
 			pokemon = app.loadImage("../imagenes/Pokemones/plantaGrande.png");
 		}
-		if(getTipo().contentEquals("Agua")) {
+		if (getTipo().contentEquals("Agua")) {
 			pokemon = app.loadImage("../imagenes/Pokemones/aguaGrande.png");
 		}
-		if(getTipo().contentEquals("Fuego")) {
+		if (getTipo().contentEquals("Fuego")) {
 			pokemon = app.loadImage("../imagenes/Pokemones/fuegoGrande.png");
 		}
-		if(getTipo().contentEquals("Normal")) {
+		if (getTipo().contentEquals("Normal")) {
 			pokemon = app.loadImage("../imagenes/Pokemones/NormalGrande.png");
 		}
-		
-		
-		posX=480;
-		posY=120;
-		
+
+		posX = 480;
+		posY = 120;
+
 	}
-	
+
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		
+
 		try {
 			movement();
+			LevelUp();
 			Thread.sleep(10);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+
 	}
-	
+
 	public void PintarPasto() {
-		app.image(pokemon, posX, posY,60,60);
+		// app.image(pokemon, posX, posY,60,60);
 	}
-	
+
 	public void movement() {
-		
-		if(app.frameCount%30==0) {
-			randomMovement = (int) app.random(0,4);
-			//System.out.println(getNombre()+ +inicialX+"..."+inicialY);
-		}
-		if (randomMovement == 0) {
 
-			if (valitedPokemon[inicialX][inicialY - 1].getType() == 0) {
-				
-				posX -= 60;
-				inicialY -= 1;
+		if (mover) {
+
+			if (app.frameCount % 30 == 0) {
+				randomMovement = (int) app.random(0, 4);
+				// System.out.println(getNombre()+ +inicialX+"..."+inicialY);
+			}
+			if (randomMovement == 0) {
+
+				if (valitedPokemon[inicialX][inicialY - 1].getType() == 0) {
+
+					posX -= 60;
+					inicialY -= 1;
+				}
+
 			}
 
-		}
+			// Derecha
 
-		// Derecha
+			if (randomMovement == 1) {
 
-		if (randomMovement == 1) {
+				if (valitedPokemon[inicialX][inicialY + 1].getType() == 0) {
 
-			if (valitedPokemon[inicialX][inicialY + 1].getType() == 0) {
-			
-				posX += 60;
-				inicialY += 1;
+					posX += 60;
+					inicialY += 1;
+				}
+
 			}
 
-		}
+			// Arriba
 
-		// Arriba
+			if (randomMovement == 2) {
 
-		if (randomMovement == 2) {
+				if (valitedPokemon[inicialX - 1][inicialY].getType() == 0) {
 
-			if (valitedPokemon[inicialX - 1][inicialY].getType() == 0) {
-				
-				posY -= 60;
-				inicialX -= 1;
+					posY -= 60;
+					inicialX -= 1;
+				}
+
 			}
 
-		}
+			// Abajo
 
-		// Abajo
+			if (randomMovement == 3) {
 
-		if (randomMovement ==3) {
+				if (valitedPokemon[inicialX + 1][inicialY].getType() == 0) {
 
-			if (valitedPokemon[inicialX + 1][inicialY].getType() == 0) {
-				
-				posY += 60;
-				inicialX += 1;
+					posY += 60;
+					inicialX += 1;
+				}
+
 			}
-
 		}
 	}
+
+	public void LevelUp() {
+
+		if (this.experiencia >= 15) {
+			this.nivel = 2;
+		}
+		
+
+
+		if (this.experiencia >= 30) {
+			this.nivel = 3;
+		}
+		
+
+
+		if (this.experiencia >= 45) {
+			this.nivel = 3;
+		}
+
 	
+
+	
+
+	}
+
+	public boolean isMover() {
+		return mover;
+	}
+
+	public void setMover(boolean mover) {
+		this.mover = mover;
+	}
+
 	@Override
 	public int compareTo(Pokemon o) {
 		// TODO Auto-generated method stub
@@ -254,28 +290,28 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 	/**
 	 * @return the posX
 	 */
-	public  int getPosX() {
+	public int getPosX() {
 		return posX;
 	}
 
 	/**
 	 * @param posX the posX to set
 	 */
-	public  void setPosX(int posX) {
+	public void setPosX(int posX) {
 		this.posX = posX;
 	}
 
 	/**
 	 * @return the posY
 	 */
-	public  int getPosY() {
+	public int getPosY() {
 		return posY;
 	}
 
 	/**
 	 * @param posY the posY to set
 	 */
-	public  void setPosY(int posY) {
+	public void setPosY(int posY) {
 		this.posY = posY;
 	}
 
@@ -307,12 +343,4 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 		this.inicialY = inicialY;
 	}
 
-	
-
-
-
-	
-	
-	
-	
 }

@@ -22,7 +22,6 @@ public class Logic {
 	private SortByLevel sortL;
 	private SortByType sortT;
 	public boolean pelea;
-	
 
 	public Logic(PApplet app) {
 
@@ -30,28 +29,27 @@ public class Logic {
 
 		mover = false;
 		salvajePokemons = new LinkedList<Pokemon>();
-		listPokemons.add(new Pokemon("Beaplum", 50, 1, 50, 50, "Planta",app));
-		listPokemons.add(new Pokemon("Toazel", 50, 1, 50, 50, "Agua",app));
-		listPokemons.add(new Pokemon("Ashtile", 50, 1, 50, 50, "Fuego",app));
-		listPokemons.add(new Pokemon("Greg", 50, 1, 50, 50, "Normal",app));
+		listPokemons.add(new Pokemon("Beaplum", 50, 1, 0, 50, "Planta", app));
+		listPokemons.add(new Pokemon("Toazel", 50, 1, 0, 50, "Agua", app));
+		listPokemons.add(new Pokemon("Ashtile", 50, 1, 0, 50, "Fuego", app));
+		listPokemons.add(new Pokemon("Greg", 50, 1, 0, 50, "Normal", app));
 		combate = new Combate(app);
 		sortL = new SortByLevel();
 		sortT = new SortByType();
-		ordenarporFecha= new OrdenarUsuarioFecha();
-		//jugador.add(new Jugador(app, "NIGGA", 10, 10));
-		//System.out.println(jugador.size());
-
+		ordenarporFecha = new OrdenarUsuarioFecha();
 	}
 
-	public void CrearJugador(String nombre,Date date) {
+	public void CrearJugador(String nombre, Date date) {
 
-		Jugador jugadortemp = new Jugador(app, nombre, 370, 15,date);
+		Jugador jugadortemp = new Jugador(app, nombre, 370, 15, date);
 		jugador.add(jugadortemp);
 		jugador.get(jugador.size() - 1).setActivo(true);
 
 	}
 
 	public void PintarJugador() {
+		
+		//System.out.println(pelea);
 
 		for (int i = 0; i < jugador.size(); i++) {
 
@@ -61,57 +59,64 @@ public class Logic {
 
 					jugador.get(i).Pintar();
 				}
-
-				//System.out.println("funciona");
-
 			}
 		}
 
 		for (int i = 0; i < salvajePokemons.size(); i++) {
 			salvajePokemons.get(i).PintarPasto();
-			//System.out.println("boca yo te amo");
 		}
 		for (int i = 0; i < jugador.size(); i++) {
 			for (int j = 0; j < salvajePokemons.size(); j++) {
-				if(PApplet.dist(jugador.get(i).getPosX(), jugador.get(i).getPosY(),salvajePokemons.get(j).getPosX(),salvajePokemons.get(j).getPosY())<30) {
-					//System.out.println("esta entrando");
-					combate.EmpezarCombate(jugador.get(i).getPokemonJugador().get(0),
-					salvajePokemons.get(j));
-				 	pelea=true;
+				if (PApplet.dist(jugador.get(i).getPosX(), jugador.get(i).getPosY(), salvajePokemons.get(j).getPosX(),
+						salvajePokemons.get(j).getPosY()) < 30) {
+					combate.EmpezarCombate(jugador.get(i).getPokemonJugador().get(0), salvajePokemons.get(j));
+					pelea = true;
+
+					if(combate.isCapturar()) {
+						
+						jugador.get(i).pokemonJugador.add(salvajePokemons.get(j));
+						salvajePokemons.remove(salvajePokemons.get(j));
+						pelea=false;
+						combate.setCapturar(false);
+						combate.setGane(false);
+						System.out.println(jugador.get(i).getPokemonJugador().size());
+						
+					}
 
 				}
 			}
 		}
-		
-		
-		
-		
-		for(int i=0; i< salvajePokemons.size(); i++) {
-			new Thread(salvajePokemons.get(i)).start();
-			
+		if (pelea) {
+			for (Pokemon salvaje : salvajePokemons) {
+				salvaje.setMover(false);
+			}
 		}
-	
+
+		for (int i = 0; i < salvajePokemons.size(); i++) {
+			new Thread(salvajePokemons.get(i)).run();
+
+		}
 	}
 
 	public void MoverPersonaje(int key) {
 
-		try {
+		if (pelea == false) {
 
-			for (int i = 0; i < jugador.size(); i++) {
+			try {
 
-				if (jugador.get(i).isActivo()) {
-					jugador.get(i).Mover(key);
-					mover = true;
+				for (int i = 0; i < jugador.size(); i++) {
+
+					if (jugador.get(i).isActivo()) {
+						jugador.get(i).Mover(key);
+						mover = true;
+					}
+
 				}
-				
 
+			} catch (ArrayIndexOutOfBoundsException E) {
+				System.out.println(E.getMessage());
+				System.out.println(new OutLimitsMapException("Esta sección esta fuera de los limites"));
 			}
-			
-			
-
-		} catch (ArrayIndexOutOfBoundsException E) {
-			System.out.println(E.getMessage());
-			System.out.println(new OutLimitsMapException("Esta sección esta fuera de los limites"));
 		}
 
 	}
@@ -127,11 +132,14 @@ public class Logic {
 					jugador.get(i).getPokemonJugador().add(listPokemons.get(2));
 
 					// System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
-					
-					for(int i1=0;i1<listPokemons.size();i1++) {
-						if(!jugador.get(i).getPokemonJugador().get(0).equals(listPokemons.get(i1))) {
-							salvajePokemons.add(new Pokemon(listPokemons.get(i1).getNombre(), listPokemons.get(i1).getVida(), listPokemons.get(i1).getNivel(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getTipo() , app));
-							
+
+					for (int i1 = 0; i1 < listPokemons.size(); i1++) {
+						if (!jugador.get(i).getPokemonJugador().get(0).equals(listPokemons.get(i1))) {
+							salvajePokemons.add(new Pokemon(listPokemons.get(i1).getNombre(),
+									listPokemons.get(i1).getVida(), listPokemons.get(i1).getNivel(),
+									listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getExperiencia(),
+									listPokemons.get(i1).getTipo(), app));
+
 						}
 					}
 				}
@@ -150,11 +158,14 @@ public class Logic {
 					jugador.get(i).getPokemonJugador().add(listPokemons.get(1));
 
 					// System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
-					
-					for(int i1=0;i1<listPokemons.size();i1++) {
-						if(!jugador.get(i).getPokemonJugador().get(0).equals(listPokemons.get(i1))) {
-							salvajePokemons.add(new Pokemon(listPokemons.get(i1).getNombre(), listPokemons.get(i1).getVida(), listPokemons.get(i1).getNivel(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getTipo() , app));
-						
+
+					for (int i1 = 0; i1 < listPokemons.size(); i1++) {
+						if (!jugador.get(i).getPokemonJugador().get(0).equals(listPokemons.get(i1))) {
+							salvajePokemons.add(new Pokemon(listPokemons.get(i1).getNombre(),
+									listPokemons.get(i1).getVida(), listPokemons.get(i1).getNivel(),
+									listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getExperiencia(),
+									listPokemons.get(i1).getTipo(), app));
+
 						}
 					}
 				}
@@ -170,11 +181,14 @@ public class Logic {
 				if (jugador.get(i).isActivo()) {
 
 					jugador.get(i).getPokemonJugador().add(listPokemons.get(0));
-					
-					for(int i1=0;i1<listPokemons.size();i1++) {
-						if(!jugador.get(i).getPokemonJugador().get(0).equals(listPokemons.get(i1))) {
-							salvajePokemons.add(new Pokemon(listPokemons.get(i1).getNombre(), listPokemons.get(i1).getVida(), listPokemons.get(i1).getNivel(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getTipo() , app));
-						
+
+					for (int i1 = 0; i1 < listPokemons.size(); i1++) {
+						if (!jugador.get(i).getPokemonJugador().get(0).equals(listPokemons.get(i1))) {
+							salvajePokemons.add(new Pokemon(listPokemons.get(i1).getNombre(),
+									listPokemons.get(i1).getVida(), listPokemons.get(i1).getNivel(),
+									listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getExperiencia(),
+									listPokemons.get(i1).getTipo(), app));
+
 						}
 					}
 				}
@@ -182,13 +196,8 @@ public class Logic {
 			}
 
 		}
-		
-		
-		
-	
+
 	}
-	
-	
 
 	public void OrdenarUsuarios(int valor) {
 
@@ -196,10 +205,10 @@ public class Logic {
 
 			Collections.sort(jugador);
 		}
-		
-		if(valor == 2) {
-			
-			Collections.sort(jugador,ordenarporFecha);
+
+		if (valor == 2) {
+
+			Collections.sort(jugador, ordenarporFecha);
 		}
 
 	}

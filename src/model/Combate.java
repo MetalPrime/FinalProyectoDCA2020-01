@@ -9,20 +9,20 @@ public class Combate {
 	PApplet app;
 	PImage dialogoPokemon;
 	PImage menuAtaque, fuego, agua, planta, fuegoF, aguaF, plantaF, ataqueFuego, ataqueagua, ataqueplanta, vidaJugador,
-			vidaenemigo;
+			vidaenemigo, normal, vacio;
 	PFont fuente;
 	int barraMaquina, tamañobarra;
 	int turno;
-	boolean menúPelea;
+	boolean menúPelea, capturar;
 	Pokemon maquina, jugador;
-	boolean dialogo;
+	boolean gane;
 
 	public Combate(PApplet app) {
 
 		this.app = app;
 		dialogoPokemon = app.loadImage("../imagenes/combate/combateAnuncioVacio.png");
 		menuAtaque = app.loadImage("../imagenes/combate/combateAtaquesPrincipal.png");
-		dialogo = true;
+		//dialogo = true;
 		fuente = app.createFont("../font/Pokemon Classic.ttf", 25);
 		fuego = app.loadImage("../imagenes/Pokemones/fuegoGrandeEspalda.png");
 		turno = 1;
@@ -37,17 +37,20 @@ public class Combate {
 		ataqueplanta = app.loadImage("../imagenes/combate/combateAtaquesPlanta.png");
 		vidaJugador = app.loadImage("../imagenes/combate/VidaJugador.png");
 		vidaenemigo = app.loadImage("../imagenes/combate/VidasEnemigos.png");
-		// 197)
-
+		normal = app.loadImage("../imagenes/Pokemones/NormalGrande.png");
+		vacio = app.loadImage("imagenes/combate/cuadro vacio.png");
+		gane = false;
+		capturar = false;
 	}
 
 	public void EmpezarCombate(Pokemon jugador, Pokemon maquina) {
 
 		this.jugador = jugador;
 		this.maquina = maquina;
-
 		app.background(255);
+		System.out.println(menúPelea);
 		app.textFont(fuente);
+		// System.out.println(gane);
 
 		VerificarVida(this.jugador, this.maquina);
 		tamañobarra = (int) PApplet.map(this.jugador.getVida(), 0, 50, 0, 197);
@@ -74,6 +77,12 @@ public class Combate {
 		if (maquina.getTipo().contentEquals("Fuego")) {
 
 			app.image(fuegoF, 573, 36);
+		}
+
+		if (maquina.getTipo().contentEquals("Normal")) {
+
+			app.image(normal, 573, 36);
+
 		}
 		if (maquina.getTipo().contentEquals("Agua")) {
 
@@ -137,17 +146,41 @@ public class Combate {
 				AtaqueMaquina();
 			}
 		}
+
+		if (gane) {
+
+			app.image(vacio, 0, 489);
+			app.fill(0);
+			app.textSize(26);
+			app.text("Capturar", 547, 610);
+
+		}
+
 	}
 
 	public void Menú() {
 
 		// System.out.println("click");
 		// Pelear
-		if (app.mouseX > 458 && app.mouseX < 458 + 157 && app.mouseY > 550 && app.mouseY < 550 + 48) {
+		
+			if (app.mouseX > 458 && app.mouseX < 458 + 157 && app.mouseY > 550 && app.mouseY < 550 + 48) {
 
-			// app.image(ataqueFuego, 0, 494);
-			menúPelea = true;
+				// app.image(ataqueFuego, 0, 494);
+				menúPelea = true;
 
+			}
+		
+
+		if (menúPelea == false && gane) {
+
+			if (app.mouseX > 547 && app.mouseX < 547 + 139 && app.mouseY > 573 && app.mouseY < 573 + 42) {
+
+				capturar = true;
+				menúPelea = true;
+				gane = false;
+				// maquina.setVida(50);
+
+			}
 		}
 
 		if (menúPelea) {
@@ -204,7 +237,7 @@ public class Combate {
 
 	public void AtaqueMaquina() {
 
-		if (maquina.getTipo().contentEquals("Fuego")) {
+		if (maquina.getTipo().contentEquals("Fuego") || maquina.getTipo().contentEquals("Normal")) {
 
 			int random;
 			random = (int) app.random(1, 2);
@@ -261,8 +294,11 @@ public class Combate {
 		if (victima == this.jugador) {
 
 			victima.setVida(victima.getVida() - 10);
+
 		} else {
-			victima.setVida(victima.getVida() - 20);
+			victima.setVida(victima.getVida() - 15);
+			jugador.setExperiencia(jugador.getExperiencia() + 7);
+
 		}
 		turno *= -1;
 
@@ -272,10 +308,13 @@ public class Combate {
 
 		if (victima == this.jugador) {
 
-			victima.setVida(victima.getVida() - 10);
+			victima.setVida(victima.getVida() - 8);
+
 		} else {
 
 			victima.setVida(victima.getVida() - 10);
+			jugador.setExperiencia(jugador.getExperiencia() + 5);
+
 		}
 		turno *= -1;
 
@@ -283,21 +322,46 @@ public class Combate {
 
 	public void Lenguetazo(Pokemon victima) {
 
-		victima.setVida(victima.getVida() - 15);
+		if (victima == this.jugador) {
+
+			victima.setVida(victima.getVida() - 10);
+
+		} else {
+			victima.setVida(victima.getVida() - 15);
+			jugador.setExperiencia(jugador.getExperiencia() + 10);
+
+		}
 		turno *= -1;
 
 	}
 
 	public void Embestida(Pokemon victima) {
 
-		victima.setVida(victima.getVida() - 10);
+		if (victima == this.jugador) {
+			victima.setVida(victima.getVida() - 10);
+		}
+
+		else {
+
+			victima.setVida(victima.getVida() - 20);
+			jugador.setExperiencia(jugador.getExperiencia() + 5);
+
+		}
 		turno *= -1;
 
 	}
 
 	public void AtaqueHoja(Pokemon victima) {
 
-		victima.setVida(victima.getVida() - 20);
+		if (victima == this.jugador) {
+
+			victima.setVida(victima.getVida() - 10);
+
+		} else {
+			victima.setVida(victima.getVida() - 15);
+			jugador.setExperiencia(jugador.getExperiencia() + 10);
+
+		}
 		turno *= -1;
 
 	}
@@ -305,15 +369,34 @@ public class Combate {
 	public void VerificarVida(Pokemon jugador, Pokemon maquina) {
 
 		if (jugador.getVida() <= 0) {
-
-			// System.out.println("rip");
+			jugador.setVida(0);
 		}
 
 		else if (maquina.getVida() <= 0) {
 
 			// System.out.println("GG");
 			maquina.setVida(0);
+			jugador.setVida(50);
+			gane = true;
+			menúPelea = false;
+
 		}
 
+	}
+
+	public boolean isGane() {
+		return gane;
+	}
+
+	public void setGane(boolean gane) {
+		this.gane = gane;
+	}
+
+	public boolean isCapturar() {
+		return capturar;
+	}
+
+	public void setCapturar(boolean capturar) {
+		this.capturar = capturar;
 	}
 }
