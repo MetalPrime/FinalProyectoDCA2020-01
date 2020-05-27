@@ -132,6 +132,19 @@ public class Logic {
 					combateRival.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), rival.getPokemonJugador().get(1));
 				 	peleaRival=true;
 				 	pelea= true;
+				 	
+				 	if(combateRival.isCapturar()) {
+						
+						pelea=false;
+						combate.setCapturar(false);
+						combate.setGane(false);
+						app.background(0);
+						app.textSize(50);
+						app.fill(255);
+						app.text("Ganaste",app.height/2-50,app.width/2-50);
+						//System.out.println(jugador.get(i).getPokemonJugador().size());
+						
+					}
 				}
 				else {
 					throw new OutLevelException("No estas listo para mi");
