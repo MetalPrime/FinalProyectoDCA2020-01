@@ -1,11 +1,10 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 
+import exception.OutLevelException;
 import exception.OutLimitsMapException;
 import processing.core.PApplet;
 
@@ -16,12 +15,16 @@ public class Logic {
 	OrdenarUsuarioFecha ordenarporFecha;
 	String nombre;
 	boolean mover;
-	Combate combate;
+	Combate combate,combateRival;
 	LinkedList<Pokemon> listPokemons = new LinkedList<Pokemon>();
 	static LinkedList<Pokemon> salvajePokemons = new LinkedList<Pokemon>();
+	private Rival rival;
 	private SortByLevel sortL;
 	private SortByType sortT;
 	public boolean pelea;
+	private int randomPelea;
+	private int randomEnemyPokemon;
+
 
 	public Logic(PApplet app) {
 
@@ -34,9 +37,19 @@ public class Logic {
 		listPokemons.add(new Pokemon("Ashtile", 50, 1, 0, 50, "Fuego", app));
 		listPokemons.add(new Pokemon("Greg", 50, 1, 0, 50, "Normal", app));
 		combate = new Combate(app);
+		combateRival = new Combate(app);
 		sortL = new SortByLevel();
 		sortT = new SortByType();
-		ordenarporFecha = new OrdenarUsuarioFecha();
+		ordenarporFecha= new OrdenarUsuarioFecha();
+		//jugador.add(new Jugador(app, "NIGGA", 10, 10));
+		//System.out.println(jugador.size());
+		rival = new Rival(app, "Rival Generico", false);
+		for(int i=0; i<2; i++) {
+			randomEnemyPokemon = (int) app.random(0,4);
+			rival.pokemonJugador.add(listPokemons.get(randomEnemyPokemon));
+		}
+		
+
 	}
 
 	public void CrearJugador(String nombre, Date date) {
@@ -65,8 +78,10 @@ public class Logic {
 		for (int i = 0; i < salvajePokemons.size(); i++) {
 			salvajePokemons.get(i).PintarPasto();
 		}
+		
 		for (int i = 0; i < jugador.size(); i++) {
 			for (int j = 0; j < salvajePokemons.size(); j++) {
+
 				if (PApplet.dist(jugador.get(i).getPosX(), jugador.get(i).getPosY(), salvajePokemons.get(j).getPosX(),
 						salvajePokemons.get(j).getPosY()) < 30) {
 					combate.EmpezarCombate(jugador.get(i).getPokemonJugador().get(0), salvajePokemons.get(j));
@@ -86,16 +101,47 @@ public class Logic {
 				}
 			}
 		}
+
+		
+	/*	if(randomPelea>=75 && randomPelea<=100) {
+			for (int i = 0; i < jugador.size(); i++) {
+			for (int j = 0; j < salvajePokemons.size(); j++) {
+					//System.out.println("esta entrando");
+					
+					combate.EmpezarCombate(jugador.get(i).getPokemonJugador().get(0),
+					salvajePokemons.get(j));
+				 	pelea=true;
+			}
+				
+			}
+		}*/
+		
+		for(int i=0; i< salvajePokemons.size(); i++) {
+			new Thread(salvajePokemons.get(i)).start();
+			
+		}
+		
+		rival.Pintar();
+		System.out.println(rival.getPokemonJugador().size());
+		
+		if(PApplet.dist(jugador.get(0).getPosX(), jugador.get(0).getPosY(),rival.getPosX(),rival.getPosY())<30) {
+			try {
+				if(jugador.get(0).getPokemonJugador().size()==2) {
+					combateRival.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), rival.getPokemonJugador().get(1));
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+				new OutLevelException("No estas listo para mi");
+			}
+		}
+		
 		if (pelea) {
 			for (Pokemon salvaje : salvajePokemons) {
 				salvaje.setMover(false);
 			}
 		}
 
-		for (int i = 0; i < salvajePokemons.size(); i++) {
-			new Thread(salvajePokemons.get(i)).run();
 
-		}
 	}
 
 	public void MoverPersonaje(int key) {
