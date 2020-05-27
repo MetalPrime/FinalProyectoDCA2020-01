@@ -17,6 +17,7 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 	int inicialX,inicialY;
 	private PApplet app;
 	private PImage pokemon;
+	private int randomMovement;
 
 	public Pokemon (String nombre, int vida,int nivel,int experiencia,int daño,String tipo,PApplet app) {
 		this.nombre = nombre;
@@ -28,8 +29,8 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 		zone = 0;
 		cols=15;
 		rows=12;
-		inicialX = 1;
-		inicialY = 7;
+		inicialX = 2;
+		inicialY = 8;
 		this.app = app;
 		
 		valitedPokemon = new Map[rows][cols];
@@ -67,20 +68,21 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 			pokemon = app.loadImage("../imagenes/Pokemones/fuegoGrande.png");
 		}
 		if(getTipo().contentEquals("Normal")) {
-			pokemon = app.loadImage("../imagenes/Pokemones/fuegoGrande.png");
+			pokemon = app.loadImage("../imagenes/Pokemones/NormalGrande.png");
 		}
 		
 		
-		posX=420;
-		posY=60;
+		posX=480;
+		posY=120;
 		
 	}
 	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		movement();
+		
 		try {
+			movement();
 			Thread.sleep(10);
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -94,6 +96,55 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 	
 	public void movement() {
 		
+		if(app.frameCount%30==0) {
+			randomMovement = (int) app.random(0,4);
+			//System.out.println(getNombre()+ +inicialX+"..."+inicialY);
+		}
+		if (randomMovement == 0) {
+
+			if (valitedPokemon[inicialX][inicialY - 1].getType() == 0) {
+				
+				posX -= 60;
+				inicialY -= 1;
+			}
+
+		}
+
+		// Derecha
+
+		if (randomMovement == 1) {
+
+			if (valitedPokemon[inicialX][inicialY + 1].getType() == 0) {
+			
+				posX += 60;
+				inicialY += 1;
+			}
+
+		}
+
+		// Arriba
+
+		if (randomMovement == 2) {
+
+			if (valitedPokemon[inicialX - 1][inicialY].getType() == 0) {
+				
+				posY -= 60;
+				inicialX -= 1;
+			}
+
+		}
+
+		// Abajo
+
+		if (randomMovement ==3) {
+
+			if (valitedPokemon[inicialX + 1][inicialY].getType() == 0) {
+				
+				posY += 60;
+				inicialX += 1;
+			}
+
+		}
 	}
 	
 	@Override
@@ -203,28 +254,28 @@ public class Pokemon implements Comparable<Pokemon>,Runnable {
 	/**
 	 * @return the posX
 	 */
-	public final int getPosX() {
+	public  int getPosX() {
 		return posX;
 	}
 
 	/**
 	 * @param posX the posX to set
 	 */
-	public final void setPosX(int posX) {
+	public  void setPosX(int posX) {
 		this.posX = posX;
 	}
 
 	/**
 	 * @return the posY
 	 */
-	public final int getPosY() {
+	public  int getPosY() {
 		return posY;
 	}
 
 	/**
 	 * @param posY the posY to set
 	 */
-	public final void setPosY(int posY) {
+	public  void setPosY(int posY) {
 		this.posY = posY;
 	}
 

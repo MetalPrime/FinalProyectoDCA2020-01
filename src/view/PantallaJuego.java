@@ -20,7 +20,7 @@ public class PantallaJuego {
 		fondo = app.loadImage("../imagenes/mapa.jpg");
 		controllerMain = new ControllerMain(app);
 		pokedexScreen = new Pokedex(app);
-
+		
 	}
 
 	public void Pintar() {

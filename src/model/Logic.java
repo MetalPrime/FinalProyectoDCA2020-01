@@ -16,6 +16,7 @@ public class Logic {
 	boolean mover;
 	Combate combate;
 	LinkedList<Pokemon> listPokemons = new LinkedList<Pokemon>();
+	static LinkedList<Pokemon> salvajePokemons = new LinkedList<Pokemon>();
 	private SortByLevel sortL;
 	private SortByType sortT;
 	public boolean pelea;
@@ -26,7 +27,7 @@ public class Logic {
 		this.app = app;
 
 		mover = false;
-
+		salvajePokemons = new LinkedList<Pokemon>();
 		listPokemons.add(new Pokemon("Beaplum", 50, 1, 50, 50, "Planta",app));
 		listPokemons.add(new Pokemon("Toazel", 50, 1, 50, 50, "Agua",app));
 		listPokemons.add(new Pokemon("Ashtile", 50, 1, 50, 50, "Fuego",app));
@@ -35,7 +36,7 @@ public class Logic {
 		sortL = new SortByLevel();
 		sortT = new SortByType();
 		//jugador.add(new Jugador(app, "NIGGA", 10, 10));
-		System.out.println(jugador.size());
+		//System.out.println(jugador.size());
 
 	}
 
@@ -63,17 +64,28 @@ public class Logic {
 			}
 		}
 
-		
-		for (int i = 0; i < listPokemons.size(); i++) {
-			listPokemons.get(i).PintarPasto();
+		for (int i = 0; i < salvajePokemons.size(); i++) {
+			salvajePokemons.get(i).PintarPasto();
+			//System.out.println("boca yo te amo");
+		}
+		for (int i = 0; i < jugador.size(); i++) {
+			for (int j = 0; j < salvajePokemons.size(); j++) {
+				if(PApplet.dist(jugador.get(i).getPosX(), jugador.get(i).getPosY(),salvajePokemons.get(j).getPosX(),salvajePokemons.get(j).getPosY())<30) {
+					//System.out.println("esta entrando");
+					combate.EmpezarCombate(jugador.get(i).getPokemonJugador().get(0),
+					salvajePokemons.get(j));
+				 	pelea=true;
+
+				}
+			}
 		}
 		
-		if(PApplet.dist(jugador.get(0).getPosX(), jugador.get(0).getPosY(),listPokemons.get(0).getPosX() ,listPokemons.get(0).getPosY())<30) {
-			//System.out.println("esta entrando");
-			combate.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0),
-			listPokemons.get(2));
-		 	pelea=true;
-
+		
+		
+		
+		for(int i=0; i< salvajePokemons.size(); i++) {
+			new Thread(salvajePokemons.get(i)).start();
+			
 		}
 	
 	}
@@ -88,8 +100,11 @@ public class Logic {
 					jugador.get(i).Mover(key);
 					mover = true;
 				}
+				
 
 			}
+			
+			
 
 		} catch (ArrayIndexOutOfBoundsException E) {
 			System.out.println(E.getMessage());
@@ -109,6 +124,13 @@ public class Logic {
 					jugador.get(i).getPokemonJugador().add(listPokemons.get(2));
 
 					// System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
+					
+					for(int i1=0;i1<listPokemons.size();i1++) {
+						if(!jugador.get(i).getPokemonJugador().get(0).equals(listPokemons.get(i1))) {
+							salvajePokemons.add(new Pokemon(listPokemons.get(i1).getNombre(), listPokemons.get(i1).getVida(), listPokemons.get(i1).getNivel(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getTipo() , app));
+							
+						}
+					}
 				}
 
 			}
@@ -125,6 +147,13 @@ public class Logic {
 					jugador.get(i).getPokemonJugador().add(listPokemons.get(1));
 
 					// System.out.println(jugador.get(i).getPokemonJugador().get(0).getNombre());
+					
+					for(int i1=0;i1<listPokemons.size();i1++) {
+						if(!jugador.get(i).getPokemonJugador().get(0).equals(listPokemons.get(i1))) {
+							salvajePokemons.add(new Pokemon(listPokemons.get(i1).getNombre(), listPokemons.get(i1).getVida(), listPokemons.get(i1).getNivel(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getTipo() , app));
+						
+						}
+					}
 				}
 
 			}
@@ -138,14 +167,25 @@ public class Logic {
 				if (jugador.get(i).isActivo()) {
 
 					jugador.get(i).getPokemonJugador().add(listPokemons.get(0));
+					
+					for(int i1=0;i1<listPokemons.size();i1++) {
+						if(!jugador.get(i).getPokemonJugador().get(0).equals(listPokemons.get(i1))) {
+							salvajePokemons.add(new Pokemon(listPokemons.get(i1).getNombre(), listPokemons.get(i1).getVida(), listPokemons.get(i1).getNivel(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getExperiencia(), listPokemons.get(i1).getTipo() , app));
+						
+						}
+					}
 				}
 
 			}
 
 		}
 		
+		
+		
 	
 	}
+	
+	
 
 	public void OrdenarUsuarios(int valor) {
 
