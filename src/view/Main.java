@@ -35,6 +35,8 @@ public class Main extends PApplet {
 
 	public void draw() {
 
+		// System.out.println(pantalla);
+
 		switch (pantalla) {
 		case 0:
 			pantallainicio.Pintar();
@@ -62,6 +64,23 @@ public class Main extends PApplet {
 
 		if (pantalla == 0) {
 
+			if (pantallausuarios) {
+
+				if (mouseX > 153 && mouseX < 153 + 92 && mouseY > 194 && mouseY < 194 + 16) {
+
+					pantallaUsuarios.OrdenarUsuarios(1);
+					pantallainicio.cambio = false;
+				}
+
+				if (mouseX > 305 && mouseX < 305 + 72 && mouseY > 194 && mouseY < 194 + 16) {
+
+					pantallaUsuarios.OrdenarUsuarios(2);
+					pantallainicio.cambio = false;
+
+				}
+
+			}
+
 			if (pantallainicio.inicio) {
 
 				if (mouseX > 354 && mouseX < 354 + 416 && mouseY > 416 && mouseY < 416 + 216) {
@@ -72,9 +91,6 @@ public class Main extends PApplet {
 				}
 
 				if (mouseX > 300 && mouseX < 300 + 325 && mouseY > 537 && mouseY < 537 + 42) {
-
-					System.out.println("regiistro");
-
 					pantallausuarios = true;
 					pantallainicio.inputs = false;
 					pantallainicio.cp5.hide();
@@ -127,21 +143,24 @@ public class Main extends PApplet {
 
 				}
 			}
-			if (pantalla == 1) {
-				pantallajuego.mouse();
 
-			}
+		}
+		if (pantalla == 1) {
+			pantallajuego.mouse();
+
 		}
 	}
 
 	public void keyPressed() {
-		
-		if(key =='ñ') {
-			
-			pantallausuarios=true;
-			pantalla=0;
-		}
+		if (pantalla == 1) {
+			if (key == 'ñ') {
 
+				// pantallausuarios = true;
+				pantalla = 0;
+				pantallainicio.cambio = false;
+				pantallainicio.inicio = true;
+			}
+		}
 		if (pantalla == 1) {
 			pantallajuego.MoverPersonaje(keyCode);
 		}

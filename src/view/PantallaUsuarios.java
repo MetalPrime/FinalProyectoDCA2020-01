@@ -19,7 +19,6 @@ public class PantallaUsuarios {
 		registro = app.loadImage("../imagenes/registros.png");
 		fuente = app.createFont("../font/Pokemon Classic.ttf", 14);
 
-
 	}
 
 	public void Pintar() {
@@ -27,14 +26,21 @@ public class PantallaUsuarios {
 		app.background(155);
 		app.image(registro, 0, 0);
 		app.fill(0);
-		//app.textSize(18);
+		// app.textSize(18);
 		app.textFont(fuente);
 
 		for (int i = 0; i < controllerInicio.listaJugadores().size(); i++) {
+			app.text(controllerInicio.listaJugadores().get(i).getNombre(), 150, 30 * i + 235);
+			app.textSize(9);
 
-			app.text(controllerInicio.listaJugadores().get(i).getNombre(), 158, 30 * i + 235);
+			app.text(controllerInicio.listaJugadores().get(i).getFecha(), 270, 30 * i + 235);
 
 		}
 
+	}
+
+	public void OrdenarUsuarios(int valor) {
+		// TODO Auto-generated method stub
+		controllerInicio.OrdenarUsuarios(valor);
 	}
 }
