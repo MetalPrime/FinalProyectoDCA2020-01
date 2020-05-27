@@ -3,6 +3,7 @@ package view;
 import javax.naming.NoInitialContextException;
 
 import processing.core.PApplet;
+import processing.event.KeyEvent;
 
 public class Main extends PApplet {
 
@@ -165,8 +166,11 @@ public class Main extends PApplet {
 			pantallajuego.MoverPersonaje(keyCode);
 		}
 
+		/////////////////////// ordenar pokemon
 		pantallajuego.key(key);
-
+		
+		//////////// ordenar usuarios
+		
 	}
 
 	public void keyReleased() {

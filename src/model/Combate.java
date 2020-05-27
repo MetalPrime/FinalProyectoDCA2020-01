@@ -16,6 +16,8 @@ public class Combate {
 	boolean menúPelea;
 	Pokemon maquina, jugador;
 	boolean dialogo;
+	private PImage normal;
+	private PImage normalF;
 
 	public Combate(PApplet app) {
 
@@ -28,10 +30,11 @@ public class Combate {
 		turno = 1;
 		agua = app.loadImage("../imagenes/Pokemones/aguaGrandeEspalda.png");
 		planta = app.loadImage("../imagenes/Pokemones/plantaGrandeEspalda.png");
-
+		normal = app.loadImage("../imagenes/Pokemones/NormalGrandeEspalda");
 		fuegoF = app.loadImage("../imagenes/Pokemones/fuegoGrande.png");
 		aguaF = app.loadImage("../imagenes/Pokemones/aguaGrande.png");
 		plantaF = app.loadImage("../imagenes/Pokemones/plantaGrande.png");
+		normalF = app.loadImage("../imagenes/Pokemones/NormalGrande.png");
 		ataqueFuego = app.loadImage("../imagenes/combate/combateAtaquesFuego.png");
 		ataqueagua = app.loadImage("../imagenes/combate/combateAtaquesAgua.png");
 		ataqueplanta = app.loadImage("../imagenes/combate/combateAtaquesPlanta.png");
@@ -67,7 +70,12 @@ public class Combate {
 		else if (jugador.getTipo().contentEquals("Planta")) {
 
 			app.image(planta, 57, 350);
-		}
+		} 
+		else if (jugador.getTipo().contentEquals("Normal")) {
+
+			app.image(normal, 57, 350);
+		} 
+
 
 		// Pokemon maquina
 
@@ -83,7 +91,11 @@ public class Combate {
 		else if (maquina.getTipo().contentEquals("Planta")) {
 
 			app.image(plantaF, 573, 36);
-		}
+		} 
+		else if (maquina.getTipo().contentEquals("Normal")) {
+
+			app.image(normalF, 573, 36);
+		} 
 
 		app.fill(0);
 

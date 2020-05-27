@@ -96,5 +96,9 @@ public class PantallaInicio {
 		controllerI.SeleccionPokemonInicial(valor);
 
 	}
+	
+	public void ordenarUsuarios(char valor) {
+		controllerI.OrdenarUsuarios(valor);
+	}
 
 }

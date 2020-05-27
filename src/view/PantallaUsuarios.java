@@ -39,8 +39,8 @@ public class PantallaUsuarios {
 
 	}
 
-	public void OrdenarUsuarios(int valor) {
+	public void OrdenarUsuarios(int i) {
 		// TODO Auto-generated method stub
-		controllerInicio.OrdenarUsuarios(valor);
+		controllerInicio.OrdenarUsuarios(i);
 	}
 }

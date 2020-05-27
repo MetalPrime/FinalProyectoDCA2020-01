@@ -40,10 +40,10 @@ public class ControllerInicio {
 		
 	}
 
-	public void OrdenarUsuarios(int valor) {
+	public void OrdenarUsuarios(int i) {
 		// TODO Auto-generated method stub
 		
-		logic.OrdenarUsuarios(1);
+		logic.OrdenarUsuarios(i);
 		
 	}
 
