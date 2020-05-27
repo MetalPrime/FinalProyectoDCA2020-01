@@ -131,6 +131,7 @@ public class Logic {
 				if(jugador.get(0).getPokemonJugador().size()>=2) {
 					combateRival.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), rival.getPokemonJugador().get(1));
 				 	peleaRival=true;
+				 	pelea= true;
 				}
 				else {
 					throw new OutLevelException("No estas listo para mi");
