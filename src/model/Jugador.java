@@ -1,5 +1,8 @@
 package model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import exception.OutLimitsMapException;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -10,17 +13,24 @@ public class Jugador extends Usuario {
 	PImage quieto;
 	PApplet app;
 	PImage[] izquierda, derecha, arriba, abajo;
-	String nombre;
+	String nombre,fecha;
+	Date date;
 	Map[][] valitedMovement;
 	int cols, rows, zone;
 	boolean isMoving;
 	int posX, posY;
 	int inicialX, inicialY;
 
-	public Jugador(PApplet app, String nombre, int posX, int posY) {
+	public Jugador(PApplet app, String nombre, int posX, int posY,Date date) {
 		super(app, nombre, activo);
 		this.app = app;
 		this.nombre = nombre;
+		this.date=date; 
+		String pattern = "dd-MM-yyyy HH:mm";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		fecha = simpleDateFormat.format(this.date);
+
+
 		izquierda = new PImage[2];
 		derecha = new PImage[2];
 		arriba = new PImage[2];
@@ -181,6 +191,22 @@ public class Jugador extends Usuario {
 	 */
 	public void setPosY(int posY) {
 		this.posY = posY;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
 	}
 
 }

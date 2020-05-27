@@ -1,4 +1,5 @@
 package controller;
+import java.util.Date;
 import java.util.LinkedList;
 
 import model.Jugador;
@@ -18,9 +19,9 @@ public class ControllerInicio {
 
 	}
 
-	public void CrearJugador(String nombre) {
+	public void CrearJugador(String nombre,Date date) {
 		
-		logic.CrearJugador(nombre);
+		logic.CrearJugador(nombre,date);
 
 	}
 	
@@ -36,6 +37,13 @@ public class ControllerInicio {
 	}
 	
 	public void mouseMenu() {
+		
+	}
+
+	public void OrdenarUsuarios(int valor) {
+		// TODO Auto-generated method stub
+		
+		logic.OrdenarUsuarios(1);
 		
 	}
 

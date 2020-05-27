@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class Logic {
 
 	static LinkedList<Jugador> jugador = new LinkedList<Jugador>();
 	PApplet app;
+	OrdenarUsuarioFecha ordenarporFecha;
 	String nombre;
 	boolean mover;
 	Combate combate;
@@ -35,14 +37,15 @@ public class Logic {
 		combate = new Combate(app);
 		sortL = new SortByLevel();
 		sortT = new SortByType();
+		ordenarporFecha= new OrdenarUsuarioFecha();
 		//jugador.add(new Jugador(app, "NIGGA", 10, 10));
 		//System.out.println(jugador.size());
 
 	}
 
-	public void CrearJugador(String nombre) {
+	public void CrearJugador(String nombre,Date date) {
 
-		Jugador jugadortemp = new Jugador(app, nombre, 370, 15);
+		Jugador jugadortemp = new Jugador(app, nombre, 370, 15,date);
 		jugador.add(jugadortemp);
 		jugador.get(jugador.size() - 1).setActivo(true);
 
@@ -189,9 +192,14 @@ public class Logic {
 
 	public void OrdenarUsuarios(int valor) {
 
-		if (valor == 0) {
+		if (valor == 1) {
 
 			Collections.sort(jugador);
+		}
+		
+		if(valor == 2) {
+			
+			Collections.sort(jugador,ordenarporFecha);
 		}
 
 	}

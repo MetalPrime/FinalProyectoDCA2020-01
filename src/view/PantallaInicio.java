@@ -1,7 +1,12 @@
 package view;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PImage;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import controlP5.*;
 import controller.ControllerInicio;
 
@@ -15,6 +20,7 @@ public class PantallaInicio {
 	boolean inicio, inputs;
 
 	boolean cambio;
+	PFont fuente;
 
 	public PantallaInicio(PApplet app) {
 
@@ -26,12 +32,18 @@ public class PantallaInicio {
 		cp5.addBang("historial").setPosition(app.width / 2, app.height / 2 + 100).setSize(50, 20).setVisible(false);
 		controllerI = new ControllerInicio(app);
 		cambio = false;
+		fuente = app.createFont("../font/Pokemon Classic.ttf", 14);
+
 		fuego = app.loadImage("../imagenes/Pokemones/fuegoGrande.png");
 		agua = app.loadImage("../imagenes/Pokemones/aguaGrande.png");
 		planta = app.loadImage("../imagenes/Pokemones/plantaGrande.png");
 		fondoInicio = app.loadImage("../imagenes/pantallaRegistroUsuario.png");
 		seleccionPokemon = app.loadImage("../imagenes/seleccionPokemon.jpeg");
 		primerPantalla = app.loadImage("../imagenes/PantallaInicio.png");
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		cp5.setFont(fuente,10);
+		
+
 		inicio = true;
 		cp5.hide();
 	}
@@ -63,7 +75,10 @@ public class PantallaInicio {
 
 			name = cp5.get(Textfield.class, "nombre").getText();
 
-			controllerI.CrearJugador(name);
+			Date date = new Date();
+
+			controllerI.CrearJugador(name, date);
+			cp5.get(Textfield.class, "nombre").clear();
 			cp5.hide();
 			cambio = true;
 			inputs = false;
@@ -72,10 +87,6 @@ public class PantallaInicio {
 
 	public void PokemonInicial() {
 
-		/*
-		 * app.image(fuego, 50, 300); app.image(agua, 300, 350); app.image(planta, 600,
-		 * 340);
-		 */
 		app.image(seleccionPokemon, 0, 0);
 
 	}
