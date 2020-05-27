@@ -129,9 +129,15 @@ public class Logic {
 				if(jugador.get(0).getPokemonJugador().size()==2) {
 					combateRival.EmpezarCombate(jugador.get(0).getPokemonJugador().get(0), rival.getPokemonJugador().get(1));
 				}
-			} catch (Exception e) {
+				else {
+					throw new OutLevelException("No estas listo para mi");
+				}
+			} catch (OutLevelException e) {
 				// TODO: handle exception
-				new OutLevelException("No estas listo para mi");
+				app.fill(255);
+				app.rect(120,120,220,40);
+				app.fill(0);
+				app.text(e.getMessage(), 130, 150);
 			}
 		}
 		

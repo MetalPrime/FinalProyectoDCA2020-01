@@ -26,9 +26,18 @@ public class PantallaJuego {
 	public void Pintar() {
 
 		app.image(fondo, 0, 0);
-
+		app.fill(0);
+		app.rect(50, 50, 150, 25);
+		app.fill(255);
+		app.textSize(12);
+		app.text("Pokedex", 90, 65);
 		if (isPokedex) {
 			pokedexScreen.paint();
+			app.fill(255);
+			app.rect(650, 650, 50, 50);
+			app.fill(0);
+			app.textSize(12);
+			app.text("Close", 650, 675);
 		}
 		
 
@@ -53,7 +62,7 @@ public class PantallaJuego {
 
 	public void mouse() {
 		
-		if (app.mouseX > 50 && app.mouseY > 50 && app.mouseX < 100 && app.mouseY < 100) {
+		if (app.mouseX > 50 && app.mouseY > 50 && app.mouseX < 200 && app.mouseY < 75) {
 			isPokedex = true;
 		}
 		if (pokedexScreen.closePokedex()) {
