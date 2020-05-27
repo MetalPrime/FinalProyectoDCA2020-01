@@ -92,7 +92,7 @@ public class Pokemon implements Comparable<Pokemon>, Runnable {
 	}
 
 	public void PintarPasto() {
-		// app.image(pokemon, posX, posY,60,60);
+		 app.image(pokemon, posX, posY,60,60);
 	}
 
 	public void movement() {

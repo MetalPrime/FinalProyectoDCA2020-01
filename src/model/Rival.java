@@ -18,11 +18,7 @@ public class Rival extends Usuario{
 		posY = 240;
 	}
 
-	@Override
-	public int compareTo(Usuario arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	
 
 	@Override
 	public void Pintar() {
@@ -34,6 +30,11 @@ public class Rival extends Usuario{
 	public void Mover(int key) {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public int compareTo(Usuario arg0) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	/**
